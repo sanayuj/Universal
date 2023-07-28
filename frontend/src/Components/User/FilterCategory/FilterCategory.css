@@ -1,0 +1,22 @@
+.fliterMainDev{
+    width: 100%;
+    height: 50px;
+    background-color:rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;border: 1px #000;
+
+}
+.categoryName{
+    display: flex;
+}
+ 
+.categoryLink{
+    text-decoration: none;
+    color: royalblue;
+}
+
+.categoryLink:hover{
+    text-decoration: none;
+    color: gray;
+}

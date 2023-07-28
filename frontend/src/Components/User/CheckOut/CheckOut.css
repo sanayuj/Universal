@@ -1,0 +1,163 @@
+.mainContentOne{
+    display: flex;
+    margin-top: 0%;
+
+}
+.subHeadingCheck{
+    margin-bottom: 40px;
+}
+
+.leftSideCheck{
+height: 880PX;
+width: 60%;
+margin-top: 40px;
+margin-left: 60px;
+
+}
+
+.rightSide{
+    width: 40%;
+    background-color: rgb(255, 255, 255); 
+}
+
+.mainHeadingCheck{
+    margin-bottom: 25px;
+}
+
+.inputBox{
+    display: flex;
+
+}
+.error{
+    color:red
+}
+
+.firstBox{
+    margin-right: 20px;
+   
+}
+
+.firstLabel{
+    font-weight: bolder;
+    font-size: 15px;
+}
+.secondLabel{
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+.firstInput{
+    height: 50px;
+    width: 300px;
+    padding: 20px;
+
+}
+
+.secondInput{
+    height: 50px;
+    width: 300px;
+    padding: 20px;
+}
+
+.message{
+    font-size: small;
+    color: grey;
+   
+}
+
+.subHeading{
+    margin-top: 40px;
+}
+
+
+.methodOption1{
+    width: 70%;
+    margin: 2px;
+    height: 50px;
+    background-color: rgb(248, 247, 246);
+}
+
+.orderDetails{
+    margin-top: 30px;
+}
+
+
+
+.rightHeading{
+    margin-top: 100px;
+    margin-left: 30px;
+}
+
+.summaryBox{
+    width: 280px;
+    height: 250px;
+    /* margin-left: 15px; */
+   
+}
+.total{
+    font-weight: bold;
+}
+.details{
+
+    margin: 30px;
+   
+}
+.methodOption1{
+    padding-top: 12px;
+    padding-left: 30px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .radio-label input[type="radio"] {
+    margin-right: 10px;
+  }
+
+ .mainHeadingThree{
+    margin-bottom: 40px;
+ }
+
+ .total{
+    display: flex;
+ }
+ .totalOne{
+    margin-right: 120px;
+ }
+ .checkCourseDetails{
+    display: flex;
+ }
+
+ .price {
+    display: flex;
+    margin-left: 0% !important;
+  }
+  
+  .CheckImage{
+    width: 150px;
+    margin-right: 10px;
+  }
+
+ .priceOne{
+    margin-right: 120px;
+ }
+
+ .Submit{
+    height: 35px;
+    width: 215px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+ }
+
+ .terms{
+    color: gray;
+    font-size: small;
+ }
+
+ .instruction{
+ font-size: small;
+ }

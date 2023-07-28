@@ -1,0 +1,81 @@
+.bookingMainPage {
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.bookingMainPageContent {
+
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 100%;
+    height: 300px;
+}
+
+.firstDivContent {
+    display: flex;
+}
+
+.imageInMain {
+    margin-left: 80px;
+    width: 400px;
+    object-fit: cover;
+}
+
+.rightSide {
+    width: 50%;
+    height: 300px;
+    background-color: rgb(205, 222, 222);
+    justify-content: center;
+    display: flex;
+    margin-right: 200px;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.leftSide {
+    width: 50%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.courseNameOne {
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+.courseAboutOne {
+    font-size: large;
+   
+}
+
+.courseDurationOne {
+    display: flex;
+}
+
+.courseDurationOne {
+    display: flex;
+
+}
+
+.icon-container {
+
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.OrderDetails{
+    width: 100%;
+    height: 400px;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.purchase{
+    margin-right: 70px;
+}

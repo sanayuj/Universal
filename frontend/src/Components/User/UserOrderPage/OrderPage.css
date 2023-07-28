@@ -1,0 +1,44 @@
+.MainContent {
+    margin: 40px;
+}
+
+.CourseDetails {
+    width: 100%;
+    height: 10pc;
+    margin: 5px;
+    background-color: rgb(228, 228, 228);
+}
+
+.subContent {
+    display: flex;
+}
+.OrderName{
+    font-weight: 900;
+    font-size: larger;
+}
+
+.OrderImage {
+    width: 150px;
+    height: 110px;
+    margin: 20px;
+    background-color: white;
+}
+.MainOrderDetails{
+    margin: 20px;
+}
+
+.myCourseAbout{
+    font-size: small;
+    margin-bottom: 8px;
+}
+
+.myCourseCategory{
+    font-size: small;
+}
+
+.myCourseCreatedAt{
+    font-size: small;
+}
+.courseDuration{
+    font-size: small;
+}

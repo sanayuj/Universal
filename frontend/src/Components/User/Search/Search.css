@@ -1,0 +1,94 @@
+.input-wrapper {
+background-color: white;
+width: 100%;
+border-radius: 10px;
+height: 2.5rem;
+padding: 0 15px;
+box-shadow: 0px 0px 8px #ddd;
+display: flex;
+align-items: center;
+}
+
+.topSearchInput {
+    background-color: transparent;
+    border: none;
+    height: 100%;
+
+    font-size: 4.25 rem;
+    width: 100%;
+    margin-left:5px;
+} 
+
+ input:focus {
+    outline:none;
+}
+
+#search-icon{
+    color: royalblue;
+    width: 30px;
+}
+#seachIcon{
+    color:white;
+}
+
+.mainContent{
+    margin-left: 100px;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.searchBar{
+    width: 600px;
+    height: 80px;
+    border-radius: 26px;
+    border: 1.5px solid black; 
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+ .searchBtn {
+
+    background-color: royalblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+  }
+.searchBtn:hover {
+    background-color: #3b76c7;
+
+}
+
+.searchResult{
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+   
+    margin-top: 50px;
+}
+
+.nullImage{
+display: flex;
+align-items: center;
+
+justify-content: center;
+
+   
+}
+
+.searchText{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image{
+    width: 400px;
+}
+
+.paginationMain{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

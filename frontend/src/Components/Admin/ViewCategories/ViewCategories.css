@@ -1,0 +1,33 @@
+.categoriesDiv {
+  background-color: rgb(255, 255, 255);
+  width: 250px;
+  margin-left: 105px;
+  padding: 10px;
+}
+
+.pageHeading {
+  margin-left: 105px;
+  margin-top: 10px;
+}
+.coursePhoto {
+  width: 230px;
+  background-color: rgb(171, 171, 171);
+  /* border-radius: 10px; */
+}
+
+/* .text{
+    padding: 8px;
+} */
+
+.CourseHeading {
+  font-size: large;
+  margin: 3px;
+}
+
+.rowOne {
+  display: flex;
+}
+
+.categoryDiv{
+    margin-top: 10px;
+}

@@ -1,0 +1,16 @@
+.outer{
+    padding:100px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.button{
+     padding: 7px 24px;
+     margin-top: 24px;
+     margin: auto;
+     display: block;
+     border-radius: 8px;
+     margin-bottom: 20px;
+}
+.resendOTP{
+    text-decoration: none;
+}

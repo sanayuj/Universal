@@ -1,0 +1,14 @@
+.categoryMainContent{
+    margin: 50px;
+}
+.nullTest{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginationMainDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,82 @@
+.content-div {
+
+    margin: 100px;
+}
+
+.disablebtn{
+    background-color: rgb(80, 108, 234);
+    border-radius: 10px;
+    color: white;
+    border:none
+}
+.enablebtn{
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    color: white;
+    border:none
+}
+
+.EditBtn{
+    color: white;
+    background-color: rgb(195, 45, 100);
+    width: 70px;
+    height: 30px;
+    margin: 6px;
+    border-radius: 2px;
+    border:none
+    
+}
+
+.userRow{
+    background-color: red;
+}
+.courseImg{
+    width: 100px;
+}
+
+.DeleteBtn{
+    color: white;
+    background-color: blueviolet;
+    width: 70px;
+    height: 30px;
+    margin: 6px;
+    border-radius: 2px;
+    border:none
+
+}
+.cancel-button{
+    color: white;
+    background-color: rgb(0, 0, 0);
+    width: 70px;
+    height: 30px;
+    margin: 6px;
+    border-radius: 2px;
+    border:none
+}
+/* ListCourse.css */
+.delete-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ede5e5;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+  }
+  
+  .delete-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+  }
+  

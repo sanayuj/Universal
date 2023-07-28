@@ -1,0 +1,88 @@
+.Maindiv {
+    margin-left: 100px;
+    margin-top: 30px;
+}
+
+.ImageUpload {
+    width: 700px;
+}
+
+.top-space {
+    margin-top: 10px;
+}
+
+.bottomSpace {
+    margin-bottom: 8px;
+
+}
+
+.firstForm {
+    display: flex;
+}
+
+.coursename {
+    margin-left: 10px;
+}
+
+.Common {
+    display: flex;
+}
+
+.price {
+    width: 100px;
+    margin-left: 50px;
+}
+
+.FormMainDev {
+    margin: 25px;
+}
+
+.submitbtn {
+    border-radius: 5px;
+    background-color: blueviolet;
+    color: rgb(255, 255, 255);
+    border: none;
+    width: 120px;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.addChapter {
+    border-radius: 5px;
+    background-color: rgb(42, 40, 40);
+    color: rgb(255, 255, 255);
+    border: none;
+    width: 120px;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.category {
+    width: 700px;
+}
+
+.addMore {
+    border-radius: 5px;
+    background-color: rgb(42, 40, 40);
+    color: rgb(255, 255, 255);
+    border: none;
+    width: 120px;
+    height: 40px;
+
+}
+.addMore:hover {
+    border: 1px solid #000;
+  }
+.btn {
+    width: 100px;
+}
+
+.showLesson {
+    height: 45px;
+    width: 100%;
+    background-color: rgb(233, 241, 241);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+
+}
