@@ -13,14 +13,14 @@ export default function Home() {
   const [courseDetails, setCourseDetails] = useState([]);
   const dispatch = useDispatch();
 
-  const handleCourseClick=(courseId)=>{
+  const handleCourseClick=(courseId)=>{  
     console.log(courseId)
     navigate(`/course/courseMainPage/${courseId}`)
   }
 
   useEffect(() => {
     getAllCourse()
-      .then((response) => {
+      .then((response) => { 
        // console.log(response)
         setCourseDetails(response.data.course);
       })
