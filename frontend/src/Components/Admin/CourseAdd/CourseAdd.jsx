@@ -22,7 +22,6 @@ export default function CourseAdd() {
     const fetchData = async () => {
       try {
         const response = await getCategoryList();
-        console.log(response.data.categories, "++++==!==++++");
         // Update the state with the fetched data
         setCategoryDetails(response.data.categories);
         setCategories(response.data.categories.map((category) => category.categoryName));
@@ -132,8 +131,6 @@ export default function CourseAdd() {
   };
 
   const courseSubmit = () => {
-    console.log(chapter, "In course CHAPTER");
-    console.log(lesson, "In submit Lesson!");
     setCourse([...course, { chapter, lessons: lesson }]);
     setChapter("")
     lessonFormik.setFieldValue("lessonName", "");

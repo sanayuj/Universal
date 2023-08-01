@@ -18,10 +18,8 @@ const navigate=useNavigate()
     try {
       AdminDashboard().then((response) => {
         try {
-          console.log(response,"response=====>>>")
           if(response.data.loginfail){
             navigate("/admin/login")
-            console.log("Ajay !!")
           }
           if (response.data.status) {
             setTotalOrder(response.data.bookingCount);

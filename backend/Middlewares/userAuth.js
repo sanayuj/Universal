@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../Model/userModel");
 
 module.exports = async (req, res, next) => {
-  console.log("asdasdasdasd!!!!!!!");
   try {
     const authHeader = req.headers.authorization;
 

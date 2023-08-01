@@ -21,7 +21,6 @@ export default function ForgotPassword() {
   });
 
   const onSubmit = async (values) => {
-    console.log(values, "front value!");
 
     try {
       const { data } = await Forgotpassword(values);

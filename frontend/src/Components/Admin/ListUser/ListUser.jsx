@@ -14,7 +14,6 @@ export default function ListUser() {
   const userDisable = async (id) => {
     try {
       const { data } = await userDisabled(id);
-      console.log(data, "STATUS!");
       if (data.status) {
         toast(data.message);
        

@@ -22,7 +22,6 @@ export default function CheckOut() {
   useEffect(() => {
     getCourseById(courseId)
       .then((response) => {
-        console.log(response.data, "OOPOPOPOPOPOPOP");
         setCourse(response.data.course);
         const createdAt = response.data.course.createAt;
         formattedDate = new Date(createdAt).toLocaleString(undefined, {
@@ -44,10 +43,7 @@ export default function CheckOut() {
 
   const initPayment = async (data, course, bookingDetails) => {
     try {
-      console.log(bookingDetails, "!!!!!!!");
-      console.log(course, " in INITPAYMENT@@@@@@");
       const amount = data.order.amount;
-      console.log(amount, "))))))");
       const courseId = course._id;
 
       const options = {
@@ -58,14 +54,11 @@ export default function CheckOut() {
         order_id: data.order.id,
 
         handler: async (response) => {
-          console.log(response, "KKKKKKK   RESp....");
 
           try {
             const { data } = await verifyApi(response, courseId, amount, bookingDetails);
-            console.log(data, "Response data");
 
            setVerifiedOrderId(data.orderId)
-            // console.log(verifiedCourseId)
             toast.success("Order successfully placed", {
               autoClose: 3000,
               position: toast.POSITION.TOP_CENTER,
@@ -73,7 +66,7 @@ export default function CheckOut() {
             navigate(`/paymentSucess/${data.courseId}/${data.orderId}`);
 
           } catch (error) {
-            toast.error(error.message, "kiiikkiki");
+            toast.error(error.message);
           }
         },
         theme: {
@@ -93,7 +86,7 @@ export default function CheckOut() {
       });
       rzp1.open();
     } catch (error) {
-      console.log(error, "KKKKK");
+      console.log(error);
     }
   };
 
@@ -101,17 +94,13 @@ export default function CheckOut() {
     try {
       const bookingDetails = values;
       const { data } = await buyCourseInCheckOut(courseId);
-      console.log(data.order, "PPPPPPPP,,,,,.,..,.,");
-      console.log(bookingDetails, "DEEEEEETAILS");
       if (values.paymentMethod === "Online Payment") {
-        console.log(data.order, "DATAAAA");
-        console.log(course, "UUUUUu");
         initPayment(data, course, bookingDetails);
       } else {
         toast.error("Payment method temporarily unavailable");
       }
     } catch (error) {
-      console.log(error, "HHHHH");
+      console.log(error);
       toast.error(error.message);
     }
   };

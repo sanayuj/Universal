@@ -13,7 +13,6 @@ export default function UserProfile() {
   const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
-    console.log(user, "USER!!!!!!!");
 
     formik.setValues({
       username: user?.username,
@@ -34,9 +33,7 @@ export default function UserProfile() {
   };
 
   const onSubmit = async (values) => {
-    console.log(values.image,"ON submit!!")
     try {
-      console.log(values, "_________-");
       console.log(profileImage, "ImagE");
 
       const {data}=await updateProfile(values,profileImage)

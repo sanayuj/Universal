@@ -1,7 +1,6 @@
 import { userInstance } from "../axios/axiosInstance";
 
 export const userSignup = (values) => {
-  console.log(values, "userAPi route!!");
   return userInstance.post("/signup", { ...values }, { withCredentials: true });
 };
 
@@ -55,7 +54,6 @@ export const profileChangePassword = (values, userId) => {
 };
 
 export const updateProfile = (values, Image) => {
-  console.log(values,Image,"12345$$$$$")
   return userInstance.post(
     "/userProfileSubmit",
     { ...values },
@@ -64,7 +62,6 @@ export const updateProfile = (values, Image) => {
 };
 
 export const getCourseById = (courseId) => {
-  console.log(courseId, "Api called!!");
   return userInstance.get(`/getCourseById/${courseId}`);
 };
 
@@ -86,7 +83,6 @@ export const verifyApi = (response, courseId, amount, bookingData) => {
 };
 
 export const getOrderDetails = (courseId, orderId) => {
-  console.log("Api Called!!!", courseId, orderId);
   return userInstance.get(`/getOrderDetails/${courseId}/${orderId}`);
 };
 
@@ -99,7 +95,6 @@ export const courseFeedback = (courseId, values) => {
 };
 
 export const search = (query,limit,currectPage) => {
-  console.log(query, "Query!!!!");
   return userInstance.get(`/search?q=${query}`, {
     params: { limit, currectPage },
   });
@@ -110,7 +105,6 @@ export const getCategory = () => {
 };
 
 export const getCourseByCategoryId = (categoryId, limit, currectPage) => {
-  console.log(categoryId, limit, currectPage, "****+>");
   return userInstance.get(`/getCourseByCategory/${categoryId}`, {
     params: { limit, currectPage },
   });

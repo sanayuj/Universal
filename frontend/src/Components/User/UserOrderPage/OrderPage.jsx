@@ -13,9 +13,7 @@ export default function OrderPage() {
   useEffect(() => {
     userCourse()
       .then((response) => {
-        console.log(response.data, '--->');
         const course = response.data.courseDetails;
-        console.log(course, '@@@@@@');
         setCourseDetails(course);
       })
       .catch((error) => {

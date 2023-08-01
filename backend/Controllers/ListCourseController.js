@@ -2,7 +2,6 @@ const courseModel= require("../Model/CourseModel")
 module.exports.getAllCourse=async(req,res,next)=>{
     try{
         let courses=await courseModel.find({})
-        // console.log(courses,"Product!!!");
         if(courses){
         res.json({courses,status:true,message:"Course Found successfully"})
         }else{

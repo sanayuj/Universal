@@ -22,7 +22,7 @@ const fileFilter = (req, file, cb) => {
 
 //image upload
 const uploadImage = (path) => {
-    console.log(path,"Multer Fun")
+    console.log(path,"Multer image upload")
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, path);

@@ -8,7 +8,6 @@ export default function FilterCategory() {
   const navigate = useNavigate();
 
   const handleCategory = (categoryId) => {
-    console.log(categoryId, "&&&&&&++++");
     navigate(`/filterproductDisplay/${categoryId}`);
   };
 
@@ -17,7 +16,6 @@ export default function FilterCategory() {
   useEffect(() => {
     getCategory()
       .then((response) => {
-        console.log(response.data.categories, "Cate!!!");
         setCategories(response.data.categories);
       })
       .catch((error) => {

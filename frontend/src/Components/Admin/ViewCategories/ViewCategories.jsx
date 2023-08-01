@@ -35,7 +35,6 @@ export default function ViewCategories() {
    
     {categoryDetail && categoryDetail
       ? categoryDetail.map((value, index) => {
-        //console.log(value,"^^^^^")
           return (
             <div className="categoriesDiv " key={value._id} >
               <div>

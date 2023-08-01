@@ -13,7 +13,6 @@ export default function BookingHistory() {
     const fetchData = async () => {
       try {
         const response = await BookingHistroyDetails();
-        console.log(response.data.BookingDetails);
         setBookingDetails(response.data.BookingDetails);
       } catch (error) {
         toast.error(error.message);

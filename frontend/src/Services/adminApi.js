@@ -12,7 +12,6 @@ export const addCourse = (values, course, image) => {
   );
 };
 export const editCourse=(values,image,courseId)=>{
-  console.log(values,image,courseId,"EDITCOURSE VALUES!!!!")
 return adminInstance.post(
   `/editCourse/${courseId}`,{...values,image},
   {headers:{ "Content-Type": "multipart/form-data" }}
@@ -20,7 +19,6 @@ return adminInstance.post(
 }
 
 export const addCategory=(values)=>{
-  console.log(values,"api called!!!!")
   return adminInstance.post("/addCategory",{...values},{ headers: { "Content-Type": "multipart/form-data" } })
 }
 
@@ -43,22 +41,18 @@ export const deleteCourse = (courseId) => {
 
 
 export const getCourseById=(courseId)=>{
-  console.log(courseId,"admin api Called")
   return adminInstance.get(`/courseEdit/${courseId}`)
 }
 
 export const AdminDashboard=()=>{
-
   return adminInstance.get("/adminDashboard")
 }
 
 export const BookingHistroyDetails=()=>{
-
   return adminInstance.get("/bookingDetails")
 }
 
 export const singleCourseBookingDetails=(id)=>{
-  console.log("api BookingMain",id)
   return adminInstance.get(`/getMainBookingPage/${id}`)
 }
 

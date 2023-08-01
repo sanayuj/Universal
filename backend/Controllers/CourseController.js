@@ -30,11 +30,9 @@ module.exports.addCourse = async (req, res, next) => {
         res.json({ message: "Course added successfully", status: true });
       })
       .catch((error) => {
-        console.log(error);
         res.json({ message: "Course added Failed", status: false });
       });
   } catch (error) {
-    console.log(error);
     res.json({ message: "Internal server error", status: false });
   }
 };
@@ -43,7 +41,6 @@ module.exports.getAllCourse = async (req, res, next) => {
   try {
     let course = await courseModel.find({});
     if (course) {
-      console.log(course);
       res.json({ course, status: true, message: "course found" });
     } else {
       res.json({ message: "No course found" });
@@ -77,10 +74,8 @@ module.exports.deleteCourse = async (req, res, next) => {
 };
 
 module.exports.getCourseById = async (req, res, next) => {
-  console.log(req.params.courseId, "%%%%%!!!!");
   try {
     const course = await courseModel.findById({ _id: req.params.courseId });
-    console.log(course, "#####!!!!#####");
     if (course) {
       res.json({ message: "Course got successfully", status: true, course });
     } else {
@@ -90,7 +85,6 @@ module.exports.getCourseById = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log(error, "!!");
 
     res.json({ message: "Internal server error", status: false });
   }
@@ -100,11 +94,9 @@ module.exports.editCourse = async (req, res, next) => {
   try {
     const id = req.params.courseId;
     let courseImage = req.files.image[0].path.replace("public/", "");
-    console.log("opp", req.body, "Controller in editCourse!!!");
 
     let course = await courseModel.findOne({ _id: id });
     if (course) {
-      console.log("Enterd into course!");
       courseModel
         .updateOne(
           { _id: id },
@@ -155,7 +147,7 @@ module.exports.buyCourse = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log(error);
+
     res.json({ message: error, status: false });
   }
 };
@@ -163,7 +155,6 @@ module.exports.buyCourse = async (req, res, next) => {
 module.exports.razorpayCall = async (req, res, next) => {
   try {
     const CourseId = req.params.courseId;
-    console.log(CourseId, "---->!");
     let course = await courseModel.findById(CourseId);
     const price = course.price;
 
@@ -193,7 +184,6 @@ module.exports.verify = async (req, res, next) => {
   const courseId = req.body.courseId;
   const amount = req.body.amount / 100;
 
-  console.log(courseId, "IIIIIIdddddd--->");
 
   const date = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
 

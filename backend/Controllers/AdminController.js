@@ -8,7 +8,6 @@ const BookingModel = require("../Model/BookingModal");
 const CategoryModel = require("../Model/CategoryModel");
 
 const createToken = (id) => {
-  console.log(id, "create token function!");
   return jwt.sign({ id }, process.env.JWT_SECRETE_KEY, {
     expiresIn: maxAge,
   });
@@ -28,7 +27,6 @@ module.exports.Adminlogin = async (req, res, next) => {
 
         res.json({ status: true, message: "Admin login successfully", token });
       } else {
-        console.log("False condition!!");
         res.json({ status: false, message: "Incorrect password" });
       }
     } else {

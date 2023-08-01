@@ -14,7 +14,6 @@ console.log(id)
     }else{
         res.json({message:"User unblock successfully",status:User.blockStatus})
     }
-        console.log(User,"________")
     }catch(error){
         res.json({message:"Internal Server Error in Disable",status:false})
     }

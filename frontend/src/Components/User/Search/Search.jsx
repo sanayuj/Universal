@@ -16,11 +16,9 @@ export default function Search() {
 
   const handleSearch = () => {
     try {
-      console.log("Entered!", query);
       if (query != "") {
         search(query, limit, currectPage)
           .then((response) => {
-            console.log(response.data.Data, "Search DATA!!!!");
             setCourse(response.data.Data);
             setTotalPage(response.data.totalPages);
           })

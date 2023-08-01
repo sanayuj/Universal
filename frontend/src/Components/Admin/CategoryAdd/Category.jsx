@@ -34,10 +34,8 @@ function AdminLogin() {
     category: Yup.string().required("* This field is requires"),
   });
   const onSubmit = async (values) => {
-    console.log(values.image,"OnCate----->")
     try {
       const { data } = await addCategory(values);
-      console.log(data,"DATA !!!!!!!")
       if (data.status) {
         
         toast.success(data.message);

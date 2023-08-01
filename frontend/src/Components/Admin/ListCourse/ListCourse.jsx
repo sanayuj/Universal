@@ -54,7 +54,6 @@ export default function ListCourse() {
       try {
         const response = await getAllCourse();
         setCourse(response.data.courses);
-        console.log(response.data, "----");
       } catch (error) {
         console.error("Failed to fetch course:", error);
       }
@@ -94,7 +93,6 @@ export default function ListCourse() {
               {Course &&
                 Course.map((courses) => (
                   <tr
-                    // className={courses.blockStatus ? "userRow" : ""}
                     key={courses?._id}
                   >
                     <td>

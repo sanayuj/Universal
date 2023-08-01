@@ -12,7 +12,6 @@ export default function App() {
 
   const handleSubmit = async () => {
     const { data } = await verifyOtp(otp);
-    console.log(data, "/daattaa");
 
     if (data.status) {
       console.log("return");

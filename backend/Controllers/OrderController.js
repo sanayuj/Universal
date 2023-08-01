@@ -3,13 +3,10 @@ const CourseModel = require("../Model/CourseModel");
 
 module.exports.getOrderDetails = async (req, res, next) => {
   try {
-    console.log("Entered into Controller!");
     const courseId = req.params.courseId;
     const orderId = req.params.orderId;
     const orderDetails = await OrderModel.findById(orderId);
-    console.log(orderDetails, "!!!@@");
     const course = await CourseModel.findById(courseId);
-    console.log(course, "+++++");
     res.json({
       message: "Order details fetched successfully",
       status: true,
@@ -29,7 +26,6 @@ module.exports.getUserCourse = async (req, res, next) => {
     );
 
     if (courseDetails && courseDetails.length > 0) {
-      console.log(courseDetails, "$!!!");
 
       res.json({ message: "Course Found", status: true, courseDetails });
     } else {
@@ -45,7 +41,6 @@ module.exports.getBookingHistroy = async (req, res, next) => {
     const BookingDetails = await OrderModel.find()
       .populate("course_id")
       .populate("user_id");
-    console.log(BookingDetails, "getBooking@@@@@");
     res.json({
       message: "fetch booking history successfully",
       status: true,
@@ -60,11 +55,9 @@ module.exports.getBookingHistroy = async (req, res, next) => {
 module.exports.getSingleBookingDetails = async (req, res, next) => {
   try {
     const orderId = req.params.orderId;
-    console.log(orderId, "****");
     const singleCourse = await OrderModel.findById({ _id: orderId })
       .populate("course_id")
       .populate("user_id");
-    console.log(singleCourse, "^^^>>><<<");
     res.json({ message: "Fetch details", status: true, singleCourse });
   } catch (error) {
     //console.log(error)

@@ -18,7 +18,6 @@ export default function OrderSucess() {
     const fetchOrderDetails = async () => {
       try {
         const details = await getOrderDetails(courseId,orderId);
-        console.log(details.data, "DATA------>");
         
 
         if (details.data.status) {

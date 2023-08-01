@@ -66,9 +66,7 @@ export default function WatchCoursePage() {
   useEffect(() => {
     const fetchCourseById = async () => {
       try {
-        console.log(courseId, "!!!!");
         const response = await getCourseById(courseId);
-        console.log(response.data.course, "!!@@!!");
         setCourse(response.data.course);
       } catch (error) {
         toast.error(error.message);
@@ -86,17 +84,11 @@ export default function WatchCoursePage() {
 
   function onViewLinkClick(url) {
     setvideoUrl(url);
-    console.log(videoUrl,"*123#")
     const youtubeLink=videoUrl
     const youTubeVideoId=getYouTubeVideoId(youtubeLink);
     setStateVideoId(youTubeVideoId)
-    console.log(stateVideoId,"final video Id---->")
   }
 
-
-    // Replace 'YOUR_YOUTUBE_VIDEO_ID' with the actual video ID you want to display
-   // const videoId = stateVideoId
-  //console.log(videoId,"@@@@@")
 
     // Optional configuration options for the YouTube player
     const opts = {

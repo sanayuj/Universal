@@ -28,9 +28,7 @@ export default function ProductMainPage() {
   };
 
   const buyCourseClick= (courseId)=>{
-console.log(courseId,"OOOOpppps")
  buySingleCourse(courseId).then((response)=>{
-  console.log(response.data,"!!!!!")
 
 
  if(response.data.login && !response.data.exist){
@@ -39,7 +37,6 @@ console.log(courseId,"OOOOpppps")
   navigate(`/checkout/${courseId}`)
   toast(response.data.message)
  }else if( response.data.exist){
-  console.log(response.data,"&&&&&723")
   toast.error("Course already exists")
  }
  else{

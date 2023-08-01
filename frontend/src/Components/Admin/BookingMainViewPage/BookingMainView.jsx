@@ -19,9 +19,7 @@ export default function BookingMainView() {
     console.log(id, '!!');
     singleCourseBookingDetails(id)
       .then((response) => {
-        console.log(response.data.singleCourse, '!12345');
         setCourseDetails(response.data.singleCourse);
-        console.log(courseDetails, '%%%%');
       })
       .catch((error) => {
         toast.error(error);

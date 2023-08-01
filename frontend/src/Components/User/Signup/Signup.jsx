@@ -21,7 +21,6 @@ export default function Signup() {
 
 console.log("onSubmit called!!")
       const { data } = await userSignup(values);
-      console.log(data,"#####")
       if (data.status) {
         navigate("/otp");
       } else {

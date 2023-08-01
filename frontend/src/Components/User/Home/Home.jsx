@@ -21,7 +21,6 @@ export default function Home() {
   useEffect(() => {
     getAllCourse()
       .then((response) => { 
-       // console.log(response)
         setCourseDetails(response.data.course);
       })
       .catch((error) => {
@@ -39,7 +38,6 @@ export default function Home() {
       <h3 className="allCourseDisplayHeading">Let start learning,{`${user?.username}`}</h3>
         {courseDetails && courseDetails
           ? courseDetails.map((value, index) => {
-            //console.log(value,"^^^^^")
               return (
                 <div className="courseDiv " key={value?._id} onClick={()=>handleCourseClick(value._id)}>
                   <div>

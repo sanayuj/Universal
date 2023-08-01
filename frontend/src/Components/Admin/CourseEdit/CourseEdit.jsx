@@ -31,9 +31,6 @@ export default function CourseEdit() {
 
         setImageUrl(courseData.image);
         setCourse(courseData);
-        //console.log(imageUrl,"IMAGE URL!!!!")
-        // console.log(response.data, "ReSpOnSe");
-        // console.log(courseData, "USESTATE VALUE");
       } catch (error) {
         console.log("Failed to fetch course", error);
       }
@@ -73,7 +70,6 @@ export default function CourseEdit() {
     },
     validationSchema: validate,
     onSubmit: async (values) => {
-      console.log("ONSUBMIT WORKED SUCCESSFULLY!!!!");
       setImage(values.image);
       const { data } = await editCourse(values, image, courseId);
       if (data.status) {

@@ -28,7 +28,6 @@ export default function App() {
       const { data } = await Forgototp(otp);
       console.log(data, "/daattaa");
       if (data.status) {
-        console.log("User approved to change");
         toast(data.message);
         navigate("/editPassword");
       } else {
