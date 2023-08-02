@@ -16,7 +16,7 @@ const maxAge = 3 * 24 * 60 * 60;
 dbConnection.dbConnect();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: process.env.ORIGIN,
   credentials: true
 }));
 
@@ -43,8 +43,8 @@ app.use("/admin", AdminRoutes);
 
 app.use(cors());
 
-app.listen(4000, () => {
-  console.log("Sever started at port 4000");
+app.listen(process.env.PORT, () => {
+  console.log(`Sever started at port ${process.env.PORT}`);
 });
 
 

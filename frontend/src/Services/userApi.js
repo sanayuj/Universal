@@ -1,6 +1,7 @@
 import { userInstance } from "../axios/axiosInstance";
 
 export const userSignup = (values) => {
+  console.log("Signuppp!");
   return userInstance.post("/signup", { ...values }, { withCredentials: true });
 };
 
