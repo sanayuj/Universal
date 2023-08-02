@@ -37,9 +37,6 @@ app.use("/", userRoutes);
 app.use("/admin", AdminRoutes);
 
 
-
-app.use(cors());
-
 app.listen(process.env.PORT, () => {
   console.log(`Sever started at port ${process.env.PORT}`);
 });
