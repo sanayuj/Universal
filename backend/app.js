@@ -15,10 +15,7 @@ const maxAge = 3 * 24 * 60 * 60;
 //database
 dbConnection.dbConnect();
 
-app.use(cors({
-  origin: process.env.ORIGIN,
-  credentials: true
-}));
+app.use(cors());
 
 //session
 app.use(
