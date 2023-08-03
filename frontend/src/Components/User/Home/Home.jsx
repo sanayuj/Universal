@@ -35,7 +35,8 @@ export default function Home() {
       <Carousel/>
 <div className="container ">
       <div className="row mainContainer">
-      <h3 className="allCourseDisplayHeading">Let start learning,{`${user?.username}`}</h3>
+      <h3 className="allCourseDisplayHeading">Let's start learning, {user?.username ? user.username : ""}</h3>
+
         {courseDetails && courseDetails
           ? courseDetails.map((value, index) => {
               return (
