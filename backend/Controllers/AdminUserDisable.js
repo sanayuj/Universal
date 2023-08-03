@@ -1,5 +1,5 @@
 const userModel=require("../Model/userModel")
-
+//function for user block
 module.exports.disableUser=async(req,res,next)=>{
 const id=req.body.id
 console.log(id)
