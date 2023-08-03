@@ -104,6 +104,7 @@ module.exports.otp = async (req, res, next) => {
 };
 
 module.exports.login = async (req, res, next) => {
+  console.log("ENtered!")
   try {
     const { email, password } = req.body;
     const customer = await user.findOne({ email });
