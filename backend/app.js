@@ -20,8 +20,21 @@ dbConnection.dbConnect();
 //   methods: ["GET", "POST"],
 //   credentials: true
 // }));
+const allowedOrigins = ['https://frontend.universaledu.online'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS (Entha cheyya!'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(logger("dev"))
 
