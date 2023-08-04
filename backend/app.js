@@ -15,11 +15,13 @@ const maxAge = 3 * 24 * 60 * 60;
 //database
 dbConnection.dbConnect();
 
-app.use(cors({
-  origin:"*",
-  methods: ["GET", "POST"],
-  credentials: true
-}));
+// app.use(cors({
+//   origin:"*",
+//   methods: ["GET", "POST"],
+//   credentials: true
+// }));
+
+app.use(cors());
 
 app.use(logger("dev"))
 
@@ -29,8 +31,7 @@ app.use(
   session({
     secret: "add-secret-key",
     resave: false,
-    saveUninitialized: true,
-    
+    saveUninitialized: true, 
   })
 );
 
@@ -45,7 +46,7 @@ app.use("/admin", AdminRoutes);
 
 
 
-app.use(cors());
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Sever started at port ${process.env.PORT}`);
