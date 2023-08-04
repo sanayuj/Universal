@@ -15,26 +15,11 @@ const maxAge = 3 * 24 * 60 * 60;
 //database
 dbConnection.dbConnect();
 
-// app.use(cors({
-//   origin:"*",
-//   methods: ["GET", "POST"],
-//   credentials: true
-// }));
-const allowedOrigins = ['https://frontend.universaledu.online'];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS (Entha cheyya!'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: process.env.ORIGIN,
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 
 app.use(logger("dev"))
 
@@ -44,7 +29,8 @@ app.use(
   session({
     secret: "add-secret-key",
     resave: false,
-    saveUninitialized: true, 
+    saveUninitialized: true,
+    
   })
 );
 
@@ -56,8 +42,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", userRoutes);
 app.use("/admin", AdminRoutes);
-
-
 
 
 
