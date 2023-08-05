@@ -69,17 +69,29 @@ export default function Search() {
         </div>
 
         <div className="searchResult">
+       
           {course ? (
             <div className="row mx-3 lg:mx-auto mb-8">
-              <h3 className="ml-5 text-2xl md:text-3xl">
-                {course ? course.length : " "} results for “{query}”
+            <h3 className="ml-5 text-2xl md:text-3xl">
+                {course ? course.length : "0"} results for “{query}”
               </h3>
             </div>
           ) : (
             <div className="container searchText">
-              <h3 className="ml-5 text-2xl md:text-3xl">
+            <div>
+            <h3 className="ml-5 text-2xl md:text-3xl">
                 Search what do you want to learn
               </h3>
+            </div>
+              
+              <div>
+
+              <p className="ml-5 text-2xl md:text-3xl">
+                {course ? course.length : "No Course found! "} 
+              </p>
+              </div>
+             
+            
             </div>
           )}
           <div className="container">

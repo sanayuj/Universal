@@ -29,7 +29,7 @@ export default function OrderPage() {
     <div>
       <Header />
       <div className='MainContent'>
-      {courseDetails.length>0 ?(
+      {courseDetails ?(
         courseDetails?.map((course) => (
           <div
             className='CourseDetails'
@@ -65,6 +65,7 @@ export default function OrderPage() {
         ))):  <div className=" nullImage ">
                   <img className="image" src="/images/nullImage1.svg" alt="" />
                 </div>}
+                <p className='errorMsg'>Course not found!</p>
       </div>
 
       <Footer/>

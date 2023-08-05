@@ -43,4 +43,9 @@
     font-size: small;
 }
 
-  
+.errorMsg{
+    display: flex;
+    font-size: large;
+   align-items: center;
+   justify-content: center;
+}

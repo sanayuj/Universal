@@ -1,10 +1,17 @@
 import React from 'react'
-import {SlSocialGoogle,SlSocialLinkedin,SlSocialTwitter} from "react-icons/sl"
+import {SlSocialGithub, SlSocialGoogle,SlSocialLinkedin,SlSocialTwitter} from "react-icons/sl"
 import "./Footer.css"
 export default function Footer() {
   return (
     <div className='mainDiv'>
-    <div className='footerHeader'><div className='footerHeaderLeft'></div><SlSocialGoogle className='icons'/><SlSocialLinkedin className='icons'/><SlSocialTwitter className='icons'/> </div>
+    <div className='footerHeader'>
+  <div className='footerHeaderLeft'></div>
+  <a href="https://www.google.com" target="_blank"><SlSocialGoogle className='icons'/></a>
+  <a href="https://www.linkedin.com/in/sanayuj/" target="_blank"><SlSocialLinkedin className='icons'/></a>
+  <a href="https://twitter.com/sanay_j" target="_blank"><SlSocialTwitter className='icons'/></a>
+  <a href="https://github.com/sanayuj" target="_blank"><SlSocialGithub className='icons'/></a>
+</div>
+
 <div className='footerMainContent'>
     <div className='ColumnOne'>
         <p>About us</p>
