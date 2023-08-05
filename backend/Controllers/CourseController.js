@@ -134,7 +134,7 @@ module.exports.buyCourse = async (req, res, next) => {
 
     if (existingOrder) {
       return res.json({
-        message: "Course already exists ",
+        message: "Order already exists ",
         login: true,
         exist: true,
       });

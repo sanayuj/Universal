@@ -52,7 +52,6 @@ module.exports.signup = async (req, res, next) => {
         res.json({ message: "This email is already exist", status: false });
       } else {
         req.session.newUser = req.body;
-        // console.log(req.session.newUser,"SESSION CALLED 1000Time")
         client.verify.v2
           .services(serviceID)
           .verifications.create({ to: `+91${phonenumber}`, channel: "sms" });
@@ -104,20 +103,15 @@ module.exports.otp = async (req, res, next) => {
 };
 
 module.exports.login = async (req, res, next) => {
-  console.log("ENtered!")
   try {
     const { email, password } = req.body;
     const customer = await user.findOne({ email });
     if (customer) {
-      //console.log(customer, "customer found!!!!!");
       const auth = await bcrypt.compare(password, customer.password);
-      //console.log(auth, "auth data!!!!");
       if (auth) {
-        console.log("insert into if condition!");
         const token = createToken(customer._id);
         res.status(200).json({ user: customer, created: true, token });
       } else {
-        console.log("auth completed!!!!!!");
         throw Error("Incorrect password");
       }
     } else {
@@ -150,7 +144,6 @@ module.exports.forgotPassword = async (req, res, next) => {
 module.exports.forgotOtp = async (req, res, next) => {
   try {
     const phonenumber = req.session.phonenumber;
-    console.log(req.session.phonenumber, "SESSION GOT");
     const otp = req.body.otp;
     console.log(otp);
 
@@ -160,7 +153,6 @@ module.exports.forgotOtp = async (req, res, next) => {
         to: `+91${phonenumber}`,
         code: otp,
       });
-    console.log(verification_check, "PPPPooooo");
     if (verification_check.status === "approved") {
       res.json({ status: true, message: "authication success." });
     } else {
@@ -196,10 +188,8 @@ module.exports.editPassword = async (req, res, next) => {
 };
 
 module.exports.resendOtp = async (req, res, next) => {
-  console.log("ReSEND_____");
   try {
     const phonenumber = req.session.phonenumber;
-    console.log(phonenumber, "=====");
     const customer = await user.findOne({ phonenumber });
 
     if (customer) {
@@ -217,7 +207,6 @@ module.exports.resendOtp = async (req, res, next) => {
 
 module.exports.getUserProfile = async (req, res, next) => {
   try {
-    console.log(req.params.userId, "User IDDDD");
   } catch (error) {
     res.json({ message: error.message });
   }
@@ -236,11 +225,9 @@ module.exports.profileChangePassword = async (req, res, next) => {
   try {
     const oldPassword = req.body.values.oldPassword;
     const newPassword = req.body.values.newPassword;
-    console.log(newPassword, "JJJJJJJ");
     const userId = req.params.userId;
 
     const User = await user.findById(userId);
-    console.log(User, "USERRRR");
 
     if (!User) {
       return res.status(404).json({ message: "User not found", status: false });
@@ -268,8 +255,7 @@ module.exports.profileChangePassword = async (req, res, next) => {
 
 module.exports.userProfileSubmit = async (req, res, next) => {
   try {
-    console.log(req.body, "pppppp");
-    console.log(req.files,"23432")
+
     let profileImage = req.files.image[0].path.replace("public/", "");
     userModel.updateOne({$set:{
       username:req.body.username,
@@ -277,11 +263,9 @@ module.exports.userProfileSubmit = async (req, res, next) => {
       image:profileImage,
 
     }}).then((response)=>{
-      console.log(response,"RES123")
       res.json({message:"Profile updated successfully",status:true})
     })
   } catch (error) {
-    console.log(error,"ErrrOne")
     res.json({ message: "Internal server error", status: false });
   }
 };

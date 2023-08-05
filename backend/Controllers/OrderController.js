@@ -60,7 +60,6 @@ module.exports.getSingleBookingDetails = async (req, res, next) => {
       .populate("user_id");
     res.json({ message: "Fetch details", status: true, singleCourse });
   } catch (error) {
-    //console.log(error)
     res.json({ message: "Internal server error", status: false });
   }
 };

@@ -46,7 +46,6 @@ module.exports.adminDashboard=async(req,res,next)=>{
     const courseCount=await courseModel.countDocuments({})
     const bookingCount=await BookingModel.countDocuments({})
     const categoryCount=await CategoryModel.countDocuments({})
-    console.log(userCount,courseCount,bookingCount,categoryCount,"^^^^^^^")
     res.json({message:"details found successfully ",status:true,userCount,courseCount,bookingCount,categoryCount})
   }catch(error){
     res.json({message:"Internal server error",status:false})
