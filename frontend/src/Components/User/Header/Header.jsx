@@ -8,14 +8,16 @@ import { setUserDetails } from "../../../features/setUser";
 import { Link } from "react-router-dom";
 import Search from "../Search/Search";
 export default function Header() {
-  const userLogOut = () => {
-    localStorage.removeItem("jwt")
-    navigate("/login")
-}
-
-  const navigate = useNavigate();
- 
+  const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const userLogOut = () => {
+    localStorage.removeItem("jwt");
+    dispatch();
+    navigate("/login");
+  };
+
   useEffect((value) => {
     userHeader().then((response) => {
       if (response.data.status) {
@@ -23,8 +25,6 @@ export default function Header() {
       }
     });
   }, []);
-
-  const user = useSelector((state) => state.user.value);
 
   const handleLoginClick = () => {
     // Navigate to the login route
@@ -60,17 +60,19 @@ export default function Header() {
           >
             Universal
           </a>
-         
+
           <div className="App">
-            <div  onClick={handleSearch} className="search-bar-container">
+            <div onClick={handleSearch} className="search-bar-container">
               <div className="input-wrapper">
                 <FaSearch id="search-icon" />
-                <input className="topSearchInput" placeholder="Search for course"  disabled/>
+                <input
+                  className="topSearchInput"
+                  placeholder="Search for course"
+                  disabled
+                />
               </div>
             </div>
           </div>
-       
-       
         </div>
 
         {user ? (
@@ -84,9 +86,13 @@ export default function Header() {
               <button className="profileButton" onClick={handleProfileClick}>
                 {user.username}
               </button>
-             
             </div>
-            <div className="userlogOutBtnDiv"> <button className="userloginBtn" onClick={userLogOut}>LogOut</button></div>
+            <div className="userlogOutBtnDiv">
+              {" "}
+              <button className="userloginBtn" onClick={userLogOut}>
+                LogOut
+              </button>
+            </div>
           </div>
         ) : (
           <div className="loginSignupBtn">
