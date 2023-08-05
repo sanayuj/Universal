@@ -5,10 +5,10 @@ export default function Carousel() {
     <div id="carouselExampleControls" className="container carousel slide" data-bs-ride="carousel">
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img src="/images/carosel1.jpg" className="image d-block w-100" alt="1" />
+          <img src="/Images/carosel1.jpg" className="image d-block w-100" alt="1" />
         </div>
         <div className="carousel-item">
-          <img src="/images/carosel2.jpg" className="image d-block w-100" alt="2" />
+          <img src="/Images/carosel2.jpg" className="image d-block w-100" alt="2" />
         </div>
         
       </div>

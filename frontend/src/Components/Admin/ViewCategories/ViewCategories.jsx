@@ -41,7 +41,7 @@ export default function ViewCategories() {
                 {" "}
                 <img
                   className="coursePhoto"
-                  src={`${process.env.REACT_APP_COURSE_IMAGE_PATH}/${value.imageUrl}`}
+                  src={`${process.env.REACT_APP_BASE_URL}/${value.imageUrl}`}
                 />
               </div>
               <div className="text">
