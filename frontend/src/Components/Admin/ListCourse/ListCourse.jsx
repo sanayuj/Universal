@@ -98,7 +98,7 @@ export default function ListCourse() {
                     <td>
                       <img
                         className="courseImg"
-                        src={`${process.env.REACT_APP_COURSE_IMAGE_PATH}/${courses?.image}`}
+                        src={`${process.env.REACT_APP_BASE_URL}/${courses?.image}`}
                       ></img>
                     </td>
 

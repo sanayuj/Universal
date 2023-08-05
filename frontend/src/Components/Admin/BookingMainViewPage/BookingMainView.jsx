@@ -40,7 +40,7 @@ export default function BookingMainView() {
               <div>
                 <img
                   className='imageInMain'
-                  src={`${process.env.REACT_APP_COURSE_IMAGE_PATH}/${courseDetails?.course_id.image}`}
+                  src={`${process.env.REACT_APP_BASE_URL}/${courseDetails?.course_id.image}`}
                   alt='Course'
                 />
               </div>
