@@ -14,7 +14,7 @@ export default function Header() {
 
   const userLogOut = () => {
     localStorage.removeItem("jwt");
-    dispatch();
+    dispatch(setUserDetails(""));
     navigate("/login");
   };
 

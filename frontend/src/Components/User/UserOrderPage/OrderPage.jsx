@@ -29,7 +29,8 @@ export default function OrderPage() {
     <div>
       <Header />
       <div className='MainContent'>
-        {courseDetails?.map((course) => (
+      {courseDetails.length>0 ?(
+        courseDetails?.map((course) => (
           <div
             className='CourseDetails'
             onClick={() => handleCourseClick(course.course_id._id)}
@@ -61,9 +62,14 @@ export default function OrderPage() {
               </div>
             </div>
           </div>
-        ))}
+        ))):  <div className=" nullImage ">
+                  <img className="image" src="/images/nullImage1.svg" alt="" />
+                </div>}
       </div>
+
       <Footer/>
+
+     
     </div>
   );
 }

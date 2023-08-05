@@ -10,7 +10,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const initialValues = {
-    username: " ",
+    username: "",
     email: "",
     password: "",
     phonenumber: "",
