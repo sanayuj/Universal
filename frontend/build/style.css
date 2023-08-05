@@ -1,0 +1,19 @@
+
+.navFont{
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .navFont{
+      font-size: 14px; /* decrease font size for smaller screens */
+    }
+  }
+  @media (max-width: 480px) {
+    .my-text {
+      font-size: 10px; /* further decrease font size for even smaller screens */
+    }
+  }
+
+  .login_mainDiv{
+    color: gray;
+  }
