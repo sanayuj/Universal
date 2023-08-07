@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import './Chart.css';
-import AdminNavBar from '../AdminNavBar/AdminNavBar';
-import Sidebar from '../SideBar/SideBar';
-import { AdminDashboard } from '../../../Services/adminApi';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+import "./Chart.css";
+import AdminNavBar from "../AdminNavBar/AdminNavBar";
+import Sidebar from "../SideBar/SideBar";
+import { AdminDashboard } from "../../../Services/adminApi";
+import { useNavigate } from "react-router-dom";
 
 export default function ChartComponent() {
   const chartRef = useRef(null);
@@ -13,13 +13,15 @@ export default function ChartComponent() {
   const [totalCourse, setTotalCourse] = useState();
   const [totatCategory, setTotalCategory] = useState();
   const [totalUser, setTotalUser] = useState();
-const navigate=useNavigate()
+  const [Loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
     try {
       AdminDashboard().then((response) => {
         try {
-          if(response.data.loginfail){
-            navigate("/admin/login")
+          setLoading(false);
+          if (response.data.loginfail) {
+            navigate("/admin/login");
           }
           if (response.data.status) {
             setTotalOrder(response.data.bookingCount);
@@ -28,7 +30,7 @@ const navigate=useNavigate()
             setTotalUser(response.data.userCount);
           }
         } catch (error) {
-          console.log('Internal server error');
+          console.log("Internal server error");
         }
       });
     } catch (error) {
@@ -38,10 +40,10 @@ const navigate=useNavigate()
 
   useEffect(() => {
     if (
-      typeof totalOrder !== 'undefined' &&
-      typeof totalCourse !== 'undefined' &&
-      typeof totatCategory !== 'undefined' &&
-      typeof totalUser !== 'undefined'
+      typeof totalOrder !== "undefined" &&
+      typeof totalCourse !== "undefined" &&
+      typeof totatCategory !== "undefined" &&
+      typeof totalUser !== "undefined"
     ) {
       // Destroy the previous chart instance before creating a new one
       if (chartRef.current) {
@@ -49,17 +51,22 @@ const navigate=useNavigate()
       }
 
       // Create the new chart instance
-      const ctx = document.getElementById('labelChart').getContext('2d');
+      const ctx = document.getElementById("labelChart").getContext("2d");
       const myPieChart = new Chart(ctx, {
         plugins: [ChartDataLabels],
-        type: 'pie',
+        type: "pie",
         data: {
-          labels: ['Course', 'Customer', 'Category', 'Orders'],
+          labels: ["Course", "Customer", "Category", "Orders"],
           datasets: [
             {
               data: [totalCourse, totalUser, totatCategory, totalOrder],
-              backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1'],
-              hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870', '#A8B3C5'],
+              backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"],
+              hoverBackgroundColor: [
+                "#FF5A5E",
+                "#5AD3D1",
+                "#FFC870",
+                "#A8B3C5",
+              ],
             },
           ],
         },
@@ -67,7 +74,7 @@ const navigate=useNavigate()
           // Your chart options here
           responsive: true,
           legend: {
-            position: 'right',
+            position: "right",
             labels: {
               padding: 20,
               boxWidth: 10,
@@ -81,14 +88,14 @@ const navigate=useNavigate()
                 dataArr.map((data) => {
                   sum += data;
                 });
-                let percentage = ((value * 100) / sum).toFixed(2) + '%';
+                let percentage = ((value * 100) / sum).toFixed(2) + "%";
                 return percentage;
               },
-              color: 'white',
+              color: "white",
               labels: {
                 title: {
                   font: {
-                    size: '16',
+                    size: "16",
                   },
                 },
               },
@@ -108,26 +115,42 @@ const navigate=useNavigate()
       };
     }
   }, [totalOrder, totalCourse, totatCategory, totalUser]);
-
-  return (
-    <div>
-      <AdminNavBar />
-      <Sidebar />
-     
-      <div className="screen-container">
+  if (!Loading) {
+    return (
       <div>
-    <p>Total Details:</p>
-      <div className='blockOne'>User :<span className='Numbers'>{` ${totalUser}`}</span></div>
-      <div className='blockTwo'>Course :<span className='Numbers'>{` ${totalCourse}`}</span></div>
-      <div className='blockTwo'>Category :<span className='Numbers'>{` ${totatCategory}`}</span></div>
-      <div className='blockTwo'>Orders :<span className='Numbers'>{` ${totalOrder}`}</span></div>
-      </div>
-     
-      
-        <div className="chart-container">
-          <canvas id="labelChart" className="chart-canvas"></canvas>
+        <AdminNavBar />
+        <Sidebar />
+
+        <div className="screen-container">
+          <div>
+            <p>Total Details:</p>
+            <div className="blockOne">
+              User :<span className="Numbers">{` ${totalUser}`}</span>
+            </div>
+            <div className="blockTwo">
+              Course :<span className="Numbers">{` ${totalCourse}`}</span>
+            </div>
+            <div className="blockTwo">
+              Category :<span className="Numbers">{` ${totatCategory}`}</span>
+            </div>
+            <div className="blockTwo">
+              Orders :<span className="Numbers">{` ${totalOrder}`}</span>
+            </div>
+          </div>
+
+          <div className="chart-container">
+            <canvas id="labelChart" className="chart-canvas"></canvas>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 }
