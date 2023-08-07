@@ -63,7 +63,7 @@ export default function OrderPage() {
             </div>
           </div>
         ))):  <div className=" nullImage ">
-                  <img className="image" src="/images/nullImage1.svg" alt="" />
+                  <img className="image" src="/Images/nullImage1.svg" alt="" />
                 </div>}
                 <p className='errorMsg'>Course not found!</p>
       </div>

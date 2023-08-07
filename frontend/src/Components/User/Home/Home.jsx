@@ -43,8 +43,10 @@ export default function Home() {
                 <div className="courseDiv " key={value?._id} onClick={()=>handleCourseClick(value._id)}>
                   <div>
                     {" "}
+                    <p>{value.image}</p>
                     <img
                       className="coursePhoto"
+                     
                       src={`${process.env.REACT_APP_COURSE_IMAGE_PATH}/${value.image}`}
                     />
                   </div>

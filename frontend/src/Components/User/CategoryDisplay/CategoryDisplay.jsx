@@ -16,7 +16,6 @@ export default function CategoryDisplay() {
   useEffect(() => {
     getCourseByCategoryId(categoryId, limit, currectPage)
       .then((response) => {
-        console.log(response.data, "+++++>");
         setCourseDetails(response.data.categoryCourse);
         setTotalPage(response.data.totalPages);
       })
@@ -79,7 +78,7 @@ export default function CategoryDisplay() {
               {" "}
               <div className="nullTest">Sorry,Currectly Unavailable!</div>
               <div className=" nullImage ">
-                <img className="image" src="/images/nullImage1.svg" alt="" />
+                <img className="image" src={`${process.env.REACT_APP_COURSE_IMAGE_PATH}/nullImage1.svg`} alt="" />
               </div>
             </div>
           )}

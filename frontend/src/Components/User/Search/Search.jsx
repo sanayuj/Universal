@@ -125,7 +125,7 @@ export default function Search() {
                 })
               ) : (
                 <div className=" nullImage ">
-                  <img className="image" src="/images/nullImage1.svg" alt="" />
+                  <img className="image" src="/Images/nullImage1.svg" alt="" />
                 </div>
               )}
               {totalPages != null && totalPages > 0 && (
