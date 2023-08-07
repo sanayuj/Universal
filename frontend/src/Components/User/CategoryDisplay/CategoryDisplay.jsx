@@ -6,16 +6,19 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import Footer from "../Footer/Footer";
+import FilterCategory from "../FilterCategory/FilterCategory";
 export default function CategoryDisplay() {
   const { categoryId } = useParams();
   const [courseDetails, setCourseDetails] = useState(null);
   const [currectPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(0);
+  const [Loading,setLoading]=useState(true)
   const limit = 1;
 
   useEffect(() => {
     getCourseByCategoryId(categoryId, limit, currectPage)
       .then((response) => {
+        setLoading(false)
         setCourseDetails(response.data.categoryCourse);
         setTotalPage(response.data.totalPages);
       })
@@ -33,10 +36,20 @@ export default function CategoryDisplay() {
   };
 
   const handleCourseClick = () => {};
-
+if(Loading){
+  return(
+    <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  )
+}
   return (
+   
     <div>
       <Header />
+     
       <div className="categoryMainContent">
         <h4>{categoryId}</h4>
 
@@ -78,12 +91,16 @@ export default function CategoryDisplay() {
               {" "}
               <div className="nullTest">Sorry,Currectly Unavailable!</div>
               <div className=" nullImage ">
-                <img className="image" src={`${process.env.REACT_APP_COURSE_IMAGE_PATH}/nullImage1.svg`} alt="" />
+                <img className="image" src="/Images/nullImage1.svg" alt="" />
               </div>
             </div>
           )}
         </div>
       </div>
+
+
+
+
       {/* Pagination */}
       {totalPages != null && totalPages > 0 && (
         <div className="paginationMainDiv">
@@ -128,4 +145,4 @@ export default function CategoryDisplay() {
       <Footer />
     </div>
   );
-}
+                }

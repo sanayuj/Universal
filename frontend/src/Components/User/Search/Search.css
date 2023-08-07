@@ -13,10 +13,9 @@ align-items: center;
     background-color: transparent;
     border: none;
     height: 100%;
-
     font-size: 4.25 rem;
     width: 100%;
-    margin-left:5px;
+    margin:15px;
 } 
 
  input:focus {
@@ -40,6 +39,7 @@ align-items: center;
 }
 .searchBar{
     width: 600px;
+    padding: 10px;
     height: 80px;
     border-radius: 26px;
     border: 1.5px solid black; 
@@ -71,7 +71,7 @@ align-items: center;
 .nullImage{
 display: flex;
 align-items: center;
-
+flex-direction: column;
 justify-content: center;
 
    

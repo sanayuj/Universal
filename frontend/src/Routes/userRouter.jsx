@@ -14,6 +14,7 @@ import UserOrderPage from "../Pages/User/userOrderPage"
 import UserWatchCourse from "../Pages/User/userWatchCoursePage"
 import UserSearchPage from "../Pages/User/userSearchPage"
 import UserCategoryDisplay from "../Pages/User/userCategoryDisplay";
+import PageNotFound from "../Pages/User/userPageNotFound";
 
 function UserRouter(){
     return(
@@ -33,6 +34,7 @@ function UserRouter(){
             <Route path="/watchcourse/:courseId" element={<UserWatchCourse/>}/>
             <Route path="/searchPage" element={<UserSearchPage/>}/>
             <Route path="/filterproductDisplay/:categoryId" element={<UserCategoryDisplay/>}/>
+            <Route path="*" element={<PageNotFound/>}/>
         </Routes>
     )
 }

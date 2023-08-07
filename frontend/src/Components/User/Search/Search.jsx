@@ -11,16 +11,24 @@ export default function Search() {
   const [query, setQuery] = useState("");
   const [currectPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(0);
+  const [Loading, setLoading] = useState(false);
+  const [courseNotFoundMsg, setcourseNotFoundMsg] = useState();
   const limit = 8;
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     try {
+      setLoading(true);
       if (query != "") {
         search(query, limit, currectPage)
           .then((response) => {
-            setCourse(response.data.Data);
-            setTotalPage(response.data.totalPages);
+            setLoading(false);
+            if (response.data.status) {
+              setCourse(response.data.Data);
+              setTotalPage(response.data.totalPages);
+            } else {
+              setcourseNotFoundMsg(response.data.message);
+            }
           })
           .catch((err) => {
             console.log(err);
@@ -37,22 +45,19 @@ export default function Search() {
     setCurrentPage(pageNumber);
   };
 
-  const handleShowCourse=(courseId)=>{
-    
-    navigate(`/course/courseMainPage/${courseId}`)
-  }
+  const handleShowCourse = (courseId) => {
+    navigate(`/course/courseMainPage/${courseId}`);
+  };
 
   return (
-    
-
     <div>
       <Header />
-      <CategoryDisplay/>
+      <CategoryDisplay />
 
       <div>
         <div className="mainContent">
           <div className="searchBar">
-            {" "}
+            {""}
             <input
               className="topSearchInput"
               placeholder="Search for course"
@@ -66,32 +71,31 @@ export default function Search() {
               <FaSearch id="seachIcon" />
             </div>
           </div>
+          {!Loading ? (
+            ("")
+          ) : (
+            <div className="p-3" >
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="searchResult">
-       
           {course ? (
             <div className="row mx-3 lg:mx-auto mb-8">
-            <h3 className="ml-5 text-2xl md:text-3xl">
+              <h3 className="ml-5 text-2xl md:text-3xl">
                 {course ? course.length : "0"} results for “{query}”
               </h3>
             </div>
           ) : (
             <div className="container searchText">
-            <div>
-            <h3 className="ml-5 text-2xl md:text-3xl">
-                Search what do you want to learn
-              </h3>
-            </div>
-              
               <div>
-
-              <p className="ml-5 text-2xl md:text-3xl">
-                {course ? course.length : "No Course found! "} 
-              </p>
+                <h3 className="ml-5 text-2xl md:text-3xl">
+                  Search what do you want to learn
+                </h3>
               </div>
-             
-            
             </div>
           )}
           <div className="container">
@@ -99,7 +103,13 @@ export default function Search() {
               {course && course.length ? (
                 course.map((value, index) => {
                   return (
-                    <div onClick={()=>{handleShowCourse(value._id)}} className="courseDiv " key={value._id}>
+                    <div
+                      onClick={() => {
+                        handleShowCourse(value._id);
+                      }}
+                      className="courseDiv "
+                      key={value._id}
+                    >
                       <div>
                         {" "}
                         <img
@@ -125,7 +135,8 @@ export default function Search() {
                 })
               ) : (
                 <div className=" nullImage ">
-                  <img className="image" src="/Images/nullImage1.svg" alt="" />
+                  <div>{courseNotFoundMsg}</div>
+                  <img className="image" src="/Images/SearchPage.png" alt="" />
                 </div>
               )}
               {totalPages != null && totalPages > 0 && (
@@ -185,6 +196,7 @@ export default function Search() {
             </div>
           </div>
         </div>
+
         <Footer />
       </div>
     </div>

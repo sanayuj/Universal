@@ -24,6 +24,9 @@ export default function FilterCategory() {
   }, []);
 
   return (
+
+    <div>
+    {categories.length >0 ?
     <div>
       <div className="fliterMainDev">
         {categories.map((value) => (
@@ -37,6 +40,13 @@ export default function FilterCategory() {
           </div>
         ))}
       </div>
+      </div>
+      :  <div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>}
     </div>
+
   );
 }

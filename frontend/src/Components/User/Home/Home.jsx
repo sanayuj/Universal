@@ -33,6 +33,7 @@ export default function Home() {
       <Header />{" "}
       <FilterCategory/>
       <Carousel/>
+      {courseDetails.length >0?
 <div className="container ">
       <div className="row mainContainer">
       <h3 className="allCourseDisplayHeading">Let's start learning, {user?.username ? user.username : ""}</h3>
@@ -43,7 +44,6 @@ export default function Home() {
                 <div className="courseDiv " key={value?._id} onClick={()=>handleCourseClick(value._id)}>
                   <div>
                     {" "}
-                    <p>{value.image}</p>
                     <img
                       className="coursePhoto"
                      
@@ -70,7 +70,13 @@ export default function Home() {
   </div>
 </div>}
       </div>
-      </div>
+      </div>:
+      <div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+      }
       <Footer/>
     </div>
   );
