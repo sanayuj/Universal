@@ -16,12 +16,15 @@ export default function CheckOut() {
   const Razorpay = useRazorpay();
   const [date, setDate] = useState(null);
   const { courseId } = useParams();
-  const [verifiedOrderId,setVerifiedOrderId]=useState(null)
+  const [verifiedOrderId, setVerifiedOrderId] = useState(null);
+  const [Loading, setLoading] = useState(true);
+  const [paymentLoading,setpaymentLoading]=useState(true)
   let formattedDate;
 
   useEffect(() => {
     getCourseById(courseId)
       .then((response) => {
+        setLoading(false);
         setCourse(response.data.course);
         const createdAt = response.data.course.createAt;
         formattedDate = new Date(createdAt).toLocaleString(undefined, {
@@ -54,17 +57,20 @@ export default function CheckOut() {
         order_id: data.order.id,
 
         handler: async (response) => {
-
           try {
-            const { data } = await verifyApi(response, courseId, amount, bookingDetails);
+            const { data } = await verifyApi(
+              response,
+              courseId,
+              amount,
+              bookingDetails
+            );
 
-           setVerifiedOrderId(data.orderId)
+            setVerifiedOrderId(data.orderId);
             toast.success("Order successfully placed", {
               autoClose: 3000,
               position: toast.POSITION.TOP_CENTER,
             });
             navigate(`/paymentSucess/${data.courseId}/${data.orderId}`);
-
           } catch (error) {
             toast.error(error.message);
           }
@@ -84,7 +90,9 @@ export default function CheckOut() {
         console.log(response.error.metadata.order_id);
         console.log(response.error.metadata.payment_id);
       });
+
       rzp1.open();
+     
     } catch (error) {
       console.log(error);
     }
@@ -94,6 +102,7 @@ export default function CheckOut() {
     try {
       const bookingDetails = values;
       const { data } = await buyCourseInCheckOut(courseId);
+      setpaymentLoading(false)
       if (values.paymentMethod === "Online Payment") {
         initPayment(data, course, bookingDetails);
       } else {
@@ -120,168 +129,180 @@ export default function CheckOut() {
   return (
     <div>
       <Header />
-      <form onSubmit={formik.handleSubmit}>
-        {course && (
-          <div className="mainContentOne ">
-            <div className="leftSideCheck container-fluid">
-              <h2 className="mainHeadingCheck">Checkout</h2>
-              <h3 className="subHeadingCheck">
-                <b>Billing address</b>
-              </h3>
-              <div className="inputBox ">
-                <div>
-                  <label className="firstLabel">State/Union Territory</label>
-                  <div className="firstBox ">
-                    <input
-                      className="firstInput"
-                      type="text"
-                      id="formuserName1"
-                      placeholder=""
-                      name="state"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.state}
-                    />
-                  </div>
-                  {formik.touched.state && formik.errors.state && (
-                    <div className="error">{formik.errors.state}</div>
-                  )}
-                </div>
-                <div>
-                  <label className="secondLabel">Country</label>
-                  <div className="secondBox ">
-                    <input
-                      className="secondInput"
-                      type="text"
-                      id="formuserName1"
-                      placeholder=""
-                      name="country"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.country}
-                    />
-                  </div>
-                  {formik.touched.country && formik.errors.country && (
-                    <div className="error">{formik.errors.country}</div>
-                  )}
-                </div>
-              </div>
-              <p className="message">
-                Universal is required by law to collect applicable transaction
-                taxes for purchases made in certain tax jurisdictions.
-              </p>
-
-              <div className="paymentMethod">
-                <h3 className="subHeading">
-                  <b>Payment method</b>
+      {!Loading ? (
+        <form onSubmit={formik.handleSubmit}>
+          {course && (
+            <div className="mainContentOne ">
+              <div className="leftSideCheck container-fluid">
+                <h2 className="mainHeadingCheck">Checkout</h2>
+                <h3 className="subHeadingCheck">
+                  <b>Billing address</b>
                 </h3>
-                {formik.touched.paymentMethod &&
-                  formik.errors.paymentMethod && (
-                    <div className="error">{formik.errors.paymentMethod}</div>
-                  )}
-                <div className="methodOption1">
-                  <label className="radio-label">
-                    <input
-                      className="radio"
-                      type="radio"
-                      name="paymentMethod"
-                      value="Online Payment"
-                      checked={formik.values.paymentMethod === "Online Payment"}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    Online Payment
-                  </label>
-                </div>
-
-                <div className="methodOption1">
-                  <label className="radio-label">
-                    <input
-                      className="radio"
-                      type="radio"
-                      name="paymentMethod"
-                      value="Apple Wallets"
-                      checked={formik.values.paymentMethod === "Apple Wallets"}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      // disabled // Disable the Apple Wallets option
-                    />
-                    Apple Wallets
-                    <span className="instruction">
-                      {" "}
-                      (temporarily unavailable)
-                    </span>
-                  </label>
-                </div>
-              </div>
-
-              <div className="orderDetails">
-                <h3 className="mainHeadingThree">
-                  <b>Order details</b>
-                </h3>
-                <div className="checkCourseDetails">
-                  <div className="CheckImage">
-                    <img
-                      className="CheckImage"
-                      src={`${process.env.REACT_APP_COURSE_IMAGE_PATH}/${course.image}`}
-                      alt={course.name}
-                    />
-                  </div>
-                  <div className="detailsAndPrice">
-                    <div>
-                      <p>
-                        <b>{course.name}</b>
-                      </p>
-                      <div className="timeAnddate">
-                        <div className="courseTime">
-                          <p>
-                            <b>Total hours {course.duration}</b>
-                          </p>
-                        </div>
-                        <div>
-                          <p>{date}</p>
-                        </div>
-                      </div>
+                <div className="inputBox ">
+                  <div>
+                    <label className="firstLabel">State/Union Territory</label>
+                    <div className="firstBox ">
+                      <input
+                        className="firstInput"
+                        type="text"
+                        id="formuserName1"
+                        placeholder=""
+                        name="state"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.state}
+                      />
                     </div>
-                    <div className="CoursePrice">₹{course.price}</div>
+                    {formik.touched.state && formik.errors.state && (
+                      <div className="error">{formik.errors.state}</div>
+                    )}
+                  </div>
+                  <div>
+                    <label className="secondLabel">Country</label>
+                    <div className="secondBox ">
+                      <input
+                        className="secondInput"
+                        type="text"
+                        id="formuserName1"
+                        placeholder=""
+                        name="country"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.country}
+                      />
+                    </div>
+                    {formik.touched.country && formik.errors.country && (
+                      <div className="error">{formik.errors.country}</div>
+                    )}
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="rightSide container-fluid">
-              <div>
-                <h3 className="rightHeading">
-                  <b>Summary</b>
-                </h3>
-                <div className="summaryBox">
-                  <div className="details">
-                    <div className="price">
-                      <div className="priceOne">
-                        <p>Price:</p>
-                      </div>
-                      <div>₹{course.price}</div>
+                <p className="message">
+                  Universal is required by law to collect applicable transaction
+                  taxes for purchases made in certain tax jurisdictions.
+                </p>
+
+                <div className="paymentMethod">
+                  <h3 className="subHeading">
+                    <b>Payment method</b>
+                  </h3>
+                  {formik.touched.paymentMethod &&
+                    formik.errors.paymentMethod && (
+                      <div className="error">{formik.errors.paymentMethod}</div>
+                    )}
+                  <div className="methodOption1">
+                    <label className="radio-label">
+                      <input
+                        className="radio"
+                        type="radio"
+                        name="paymentMethod"
+                        value="Online Payment"
+                        checked={
+                          formik.values.paymentMethod === "Online Payment"
+                        }
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
+                      Online Payment
+                    </label>
+                  </div>
+
+                  <div className="methodOption1">
+                    <label className="radio-label">
+                      <input
+                        className="radio"
+                        type="radio"
+                        name="paymentMethod"
+                        value="Apple Wallets"
+                        checked={
+                          formik.values.paymentMethod === "Apple Wallets"
+                        }
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        // disabled // Disable the Apple Wallets option
+                      />
+                      Apple Wallets
+                      <span className="instruction">
+                        {" "}
+                        (temporarily unavailable)
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="orderDetails">
+                  <h3 className="mainHeadingThree">
+                    <b>Order details</b>
+                  </h3>
+                  <div className="checkCourseDetails">
+                    <div className="CheckImage">
+                      <img
+                        className="CheckImage"
+                        src={`${process.env.REACT_APP_COURSE_IMAGE_PATH}/${course.image}`}
+                        alt={course.name}
+                      />
                     </div>
-                    <hr />
-                    <div className="total">
+                    <div className="detailsAndPrice">
                       <div>
-                        <p className="totalOne">Total:</p>
-                      </div>{" "}
-                      <div>₹{course.price}</div>
+                        <p>
+                          <b>{course.name}</b>
+                        </p>
+                        <div className="timeAnddate">
+                          <div className="courseTime">
+                            <p>
+                              <b>Total hours {course.duration}</b>
+                            </p>
+                          </div>
+                          <div>
+                            <p>{date}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="CoursePrice">₹{course.price}</div>
                     </div>
-                    <p className="terms">
-                      By completing your purchase you agree to these Terms of
-                      Service.
-                    </p>
-                    <button className="Submit" type="submit">
-                      Complete checkout
-                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="rightSide container-fluid">
+                <div>
+                  <h3 className="rightHeading">
+                    <b>Summary</b>
+                  </h3>
+                  <div className="summaryBox">
+                    <div className="details">
+                      <div className="price">
+                        <div className="priceOne">
+                          <p>Price:</p>
+                        </div>
+                        <div>₹{course.price}</div>
+                      </div>
+                      <hr />
+                      <div className="total">
+                        <div>
+                          <p className="totalOne">Total:</p>
+                        </div>{" "}
+                        <div>₹{course.price}</div>
+                      </div>
+                      <p className="terms">
+                        By completing your purchase you agree to these Terms of
+                        Service.
+                      </p>
+                      <button className="Submit" type="submit">
+                        Complete checkout
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          )}
+        </form>
+      ) : (
+        <div class="d-flex justify-content-center align-items-center vh-100">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
           </div>
-        )}
-      </form>
+        </div>
+      )}
     </div>
   );
 }

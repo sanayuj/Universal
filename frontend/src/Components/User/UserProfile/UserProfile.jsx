@@ -34,7 +34,6 @@ export default function UserProfile() {
 
   const onSubmit = async (values) => {
     try {
-      console.log(profileImage, "ImagE");
 
       const {data}=await updateProfile(values,profileImage)
       if(data.status){
@@ -307,6 +306,7 @@ export default function UserProfile() {
                           className="form-control"
                           id="exampleInputPassword1"
                           name="oldPassword"
+                          placeholder="Current password"
                           onChange={formikModal.handleChange}
                           onBlur={formikModal.handleBlur}
                           value={formikModal.values.oldPassword}
@@ -332,7 +332,7 @@ export default function UserProfile() {
                         />
                       </div>
 
-                      <div className="col-md-12 mt-4">
+                      <div className="col-md-12 mt-4 pb-5">
                         {formikModal.touched.confirmPassword &&
                         formikModal.errors.confirmPassword ? (
                           <p className="text-danger small m-0 p-0">
