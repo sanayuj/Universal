@@ -86,3 +86,12 @@
     padding: 10px;
 
 }
+
+.showChapter{
+    height: 45px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+}

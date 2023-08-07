@@ -4,19 +4,19 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { addCourse } from "../../../Services/adminApi";
 import { toast } from "react-toastify";
-import {getCategoryList} from "../../../Services/adminApi"
+import { getCategoryList } from "../../../Services/adminApi";
 
 export default function CourseAdd() {
-  const [categoryDetails,setCategoryDetails]=useState({})
+  const [categoryDetails, setCategoryDetails] = useState({});
   const lessonNameRef = useRef(null);
   const lessonLinkRef = useRef(null);
   const [categories, setCategories] = useState([]);
+  const [chapterName, setchapterName] = useState([]);
 
   const [image, setImage] = useState("");
   const [lesson, setLesson] = useState([]);
   const [chapter, setChapter] = useState("");
   const [course, setCourse] = useState([]);
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,9 +24,11 @@ export default function CourseAdd() {
         const response = await getCategoryList();
         // Update the state with the fetched data
         setCategoryDetails(response.data.categories);
-        setCategories(response.data.categories.map((category) => category.categoryName));
+        setCategories(
+          response.data.categories.map((category) => category.categoryName)
+        );
       } catch (error) {
-        console.log(error)
+        console.log(error);
         // Handle the error properly
         toast.error(error.message);
       }
@@ -87,6 +89,7 @@ export default function CourseAdd() {
 
       if (data.status) {
         toast(data.message, { position: "top-right" });
+        formik.resetForm();
       } else {
         toast.error(data.message, { position: "top-right" });
       }
@@ -132,13 +135,13 @@ export default function CourseAdd() {
 
   const courseSubmit = () => {
     setCourse([...course, { chapter, lessons: lesson }]);
-    setChapter("")
+    setChapter("");
+    console.log(course,"$$$$")
+    setchapterName(course)
     lessonFormik.setFieldValue("lessonName", "");
     lessonFormik.setFieldValue("videoUrl", "");
-    setLesson("")
+    setLesson("");
     // Submit Button
-
-
   };
 
   return (
@@ -213,29 +216,31 @@ export default function CourseAdd() {
                 </div>
               </div>
               <div className="Common">
-        <div class="form-group category top-space">
-          <label for="categorySelect" className="bottomSpace">
-            Category
-          </label>
-          <select
-            name="category"
-            value={formik.values.category}
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            className="form-control"
-            id="categorySelect"
-          >
-            <option value="">Select a category</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-          {formik.touched.category && formik.errors.category ? (
-            <p className="text-danger small">{formik.errors.category}</p>
-          ) : null}
-        </div>
+                <div class="form-group category top-space">
+                  <label for="categorySelect" className="bottomSpace">
+                    Category
+                  </label>
+                  <select
+                    name="category"
+                    value={formik.values.category}
+                    onBlur={formik.handleBlur}
+                    onChange={handleChange}
+                    className="form-control"
+                    id="categorySelect"
+                  >
+                    <option value="">Select a category</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                  {formik.touched.category && formik.errors.category ? (
+                    <p className="text-danger small">
+                      {formik.errors.category}
+                    </p>
+                  ) : null}
+                </div>
                 <div class="form-group   top-space category">
                   <label for="exampleFormControlInput1" className="bottomSpace">
                     Languages
@@ -326,6 +331,23 @@ export default function CourseAdd() {
                     {formik.errors.description}
                   </p>
                 ) : null}
+              </div>
+              <div>
+              <hr></hr>
+              <p>Added Chapter</p>
+                {Array.isArray(chapterName) && chapterName.length > 0 ? (
+                  <div>
+                    {chapterName.map((value, index) => {
+                      return (
+                        <div className="showChapter" key={index}>
+                        <p>{`${index + 1} : ${value.chapter}`}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className=""></div>
+                )}
               </div>
 
               <div className="button">
@@ -444,9 +466,13 @@ export default function CourseAdd() {
                 </div>
               </form>
               {lesson[0] ? (
-              <div>
+                <div>
                   {lesson.map((value, index) => {
-                    return   <div className="showLesson"><p> {value.lessonName}</p></div>
+                    return (
+                      <div className="showLesson">
+                        <p> {value.lessonName}</p>
+                      </div>
+                    );
                   })}
                 </div>
               ) : (
