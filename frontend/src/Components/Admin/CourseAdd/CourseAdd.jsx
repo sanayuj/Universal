@@ -136,8 +136,8 @@ export default function CourseAdd() {
   const courseSubmit = () => {
     setCourse([...course, { chapter, lessons: lesson }]);
     setChapter("");
-    console.log(course,"$$$$")
-    setchapterName(chapter)
+    console.log(course, "$$$$");
+    setchapterName(course);
     lessonFormik.setFieldValue("lessonName", "");
     lessonFormik.setFieldValue("videoUrl", "");
     setLesson("");
@@ -333,14 +333,14 @@ export default function CourseAdd() {
                 ) : null}
               </div>
               <div>
-              <hr></hr>
-              <p>Added Chapter</p>
+                <hr></hr>
+                <p>Added Chapter</p>
                 {Array.isArray(chapterName) && chapterName.length > 0 ? (
                   <div>
                     {chapterName.map((value, index) => {
                       return (
                         <div className="showChapter" key={index}>
-                        <p>{`${index + 1} : ${value.chapter}`}</p>
+                          <p>{`${index + 1} : ${value.chapter}`}</p>
                         </div>
                       );
                     })}
