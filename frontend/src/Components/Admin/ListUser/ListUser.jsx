@@ -27,16 +27,18 @@ export default function ListUser() {
   };
 
   const [users, setUsers] = useState([]);
+  const [Loading,setLoading]=useState(true)
   useEffect(() => {
     getAllUser()
       .then((response) => {
+        setLoading(false)
         setUsers(response.data.User);
       })
       .catch((error) => {
         toast.error(error.message);
       });
   }, []);
-
+if(!Loading){
   return (
     <div>
       <AdminNavBar />
@@ -84,4 +86,13 @@ export default function ListUser() {
       </div>
     </div>
   );
+        }else{
+          return(
+            <div class="d-flex justify-content-center align-items-center vh-100">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          )
+        }
 }

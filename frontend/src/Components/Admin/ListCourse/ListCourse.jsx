@@ -15,6 +15,7 @@ export default function ListCourse() {
   const [Course, setCourse] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [courseId, setCourseId] = useState(null);
+  const [Loading, setLoading] = useState(true);
 
   const OpenDeleteModal = (courseId) => {
     setCourseId(courseId);
@@ -54,6 +55,7 @@ export default function ListCourse() {
       try {
         const response = await getAllCourse();
         setCourse(response.data.courses);
+        setLoading(false);
       } catch (error) {
         console.error("Failed to fetch course:", error);
       }
@@ -65,107 +67,116 @@ export default function ListCourse() {
     const date = new Date(timestamp);
     return date.toLocaleDateString(); // Returns a formatted date string
   };
+  if (!Loading) {
+    return (
+      <div>
+        <AdminNavBar />
+        <Sidebar />
+        <div className="content-div">
+          <h3>Course</h3>
+          {Course?.length > 0 ? (
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">About</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Durations</th>
+                  <th scope="col">Language</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Created</th>
+                  <th scope="col">Chapter</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {Course &&
+                  Course.map((courses) => (
+                    <tr key={courses?._id}>
+                      <td>
+                        <img
+                          className="courseImg"
+                          src={`${process.env.REACT_APP_BASE_URL}/${courses?.image}`}
+                        ></img>
+                      </td>
 
-  return (
-    <div>
-      <AdminNavBar />
-      <Sidebar />
-      <div className="content-div">
-        <h3>Course</h3>
-        {Course?.length > 0 ? (
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">About</th>
-                <th scope="col">Description</th>
-                <th scope="col">Category</th>
-                <th scope="col">Durations</th>
-                <th scope="col">Language</th>
-                <th scope="col">Price</th>
-                <th scope="col">Created</th>
-                <th scope="col">Chapter</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {Course &&
-                Course.map((courses) => (
-                  <tr
-                    key={courses?._id}
-                  >
-                    <td>
-                      <img
-                        className="courseImg"
-                        src={`${process.env.REACT_APP_BASE_URL}/${courses?.image}`}
-                      ></img>
-                    </td>
+                      <td>{courses?.name}</td>
+                      <td>{courses?.about}</td>
+                      <td>{courses?.description}</td>
+                      <td>{courses?.category}</td>
+                      <td>{courses?.duration}</td>
+                      <td>{courses?.language}</td>
+                      <td>{courses?.price}</td>
 
-                    <td>{courses?.name}</td>
-                    <td>{courses?.about}</td>
-                    <td>{courses?.description}</td>
-                    <td>{courses?.category}</td>
-                    <td>{courses?.duration}</td>
-                    <td>{courses?.language}</td>
-                    <td>{courses?.price}</td>
+                      <td>{formatDate(courses?.createAt)}</td>
+                      <td>
+                        {courses?.chapters.map((chapter, index) => (
+                          <div key={chapter?.chapterId}>
+                            <p>
+                              {index + 1}.{chapter?.chapter}
+                            </p>
+                          </div>
+                        ))}
+                      </td>
+                      <td>
+                        <div>
+                          <button
+                            className="EditBtn"
+                            onClick={() =>
+                              navigate(`/admin/courseEdit/${courses?._id}`)
+                            }
+                          >
+                            Edit
+                          </button>
 
-                    <td>{formatDate(courses?.createAt)}</td>
-                    <td>
-                      {courses?.chapters.map((chapter, index) => (
-                        <div key={chapter?.chapterId}>
-                          <p>
-                            {index + 1}.{chapter?.chapter}
-                          </p>
+                          <button
+                            onClick={() => OpenDeleteModal(courses?._id)}
+                            className="DeleteBtn"
+                          >
+                            Delete
+                          </button>
                         </div>
-                      ))}
-                    </td>
-                    <td>
-                      <div>
-                        <button
-                          className="EditBtn"
-                          onClick={() => navigate(`/admin/courseEdit/${courses?._id}`)}
-                        >
-                          Edit
-                        </button>
-
-                        <button
-                          onClick={() => OpenDeleteModal(courses?._id)}
-                          className="DeleteBtn"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        ) : (
-          <p className="no-users">No Course found.</p>
-        )}
-      </div>
-
-      {/* <MODAL> */}
-      <Modal
-        isOpen={showModal}
-        onRequestClose={closeDeleteModal}
-        className="delete-modal"
-        overlayClassName="delete-modal-overlay"
-        ariaHideApp={false}
-      >
-        <h2>Confirmation</h2>
-        <p>Are you sure you want to delete this course?</p>
-
-        <div className="modal-buttons">
-          <button className="DeleteBtn" onClick={confirmDelete}>
-            Confirm
-          </button>
-          <button className="cancel-button" onClick={closeDeleteModal}>
-            Cancel
-          </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          ) : (
+            <p className="no-users">No Course found.</p>
+          )}
         </div>
-      </Modal>
-    </div>
-  );
+
+        {/* <MODAL> */}
+        <Modal
+          isOpen={showModal}
+          onRequestClose={closeDeleteModal}
+          className="delete-modal"
+          overlayClassName="delete-modal-overlay"
+          ariaHideApp={false}
+        >
+          <h2>Confirmation</h2>
+          <p>Are you sure you want to delete this course?</p>
+
+          <div className="modal-buttons">
+            <button className="DeleteBtn" onClick={confirmDelete}>
+              Confirm
+            </button>
+            <button className="cancel-button" onClick={closeDeleteModal}>
+              Cancel
+            </button>
+          </div>
+        </Modal>
+      </div>
+    );
+  } else {
+    return (
+      <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 }

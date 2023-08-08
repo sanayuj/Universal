@@ -13,6 +13,7 @@ export default function CourseEdit() {
   const { courseId } = useParams();
   const [image, setImage] = useState("");
   const [imageUrl, setImageUrl] = useState();
+  const [Loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchCourse = async (courseId) => {
       try {
@@ -28,9 +29,9 @@ export default function CourseEdit() {
           price: courseData.price,
           description: courseData.description,
         });
-
         setImageUrl(courseData.image);
         setCourse(courseData);
+        setLoading(false);
       } catch (error) {
         console.log("Failed to fetch course", error);
       }
@@ -101,215 +102,224 @@ export default function CourseEdit() {
           <div>
             <h5 className="Heading">Edit Course</h5>
             <div className="FormMainDev">
-              <form onSubmit={formik.handleSubmit}>
-                <div className="Common">
-                  <div>
-                    <label for="formFileDisabled" class="form-label">
-                      Upload Image for thumbnail
-                    </label>
-                    <input
-                      class="form-control "
-                      // ImageUpload
-                      type="file"
-                      name="image"
-                      onBlur={formik.handleBlur}
-                      id="formFileDisabled"
-                      onChange={(e) => {
-                        handleImage(e);
-                        setImage(e.target.files[0]);
-                      }}
-                    />
+              {!Loading ? (
+                <form onSubmit={formik.handleSubmit}>
+                  <div className="Common">
+                    <div>
+                      <label for="formFileDisabled" class="form-label">
+                        Upload Image for thumbnail
+                      </label>
+                      <input
+                        class="form-control "
+                        // ImageUpload
+                        type="file"
+                        name="image"
+                        onBlur={formik.handleBlur}
+                        id="formFileDisabled"
+                        onChange={(e) => {
+                          handleImage(e);
+                          setImage(e.target.files[0]);
+                        }}
+                      />
 
-                    {formik.touched.image && formik.errors.image ? (
-                      <p className="text-danger small">{formik.errors.image}</p>
-                    ) : null}
+                      {formik.touched.image && formik.errors.image ? (
+                        <p className="text-danger small">
+                          {formik.errors.image}
+                        </p>
+                      ) : null}
+                    </div>
+                    <div class="form-group spaceBetween">
+                      <label
+                        for="exampleFormControlInput1"
+                        className="bottomSpace"
+                      >
+                        Price
+                      </label>
+
+                      <input
+                        type="Number"
+                        name="price"
+                        value={formik.values.price}
+                        onBlur={formik.handleBlur}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                        className="form-control "
+                        id="exampleFormControlInput1"
+                        placeholder=""
+                      />
+
+                      {formik.touched.price && formik.errors.price ? (
+                        <p className="text-danger small">
+                          {formik.errors.price}
+                        </p>
+                      ) : null}
+                    </div>
+                    <div class="form-group ">
+                      <label
+                        for="exampleFormControlInput1"
+                        className="bottomSpace"
+                      >
+                        Duration
+                      </label>
+                      <input
+                        type="Number"
+                        name="duration"
+                        value={formik.values.duration}
+                        onBlur={formik.handleBlur}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                        className="form-control "
+                        id="exampleFormControlInput1"
+                        placeholder=""
+                      />
+
+                      {formik.touched.duration && formik.errors.duration ? (
+                        <p className="text-danger small">
+                          {formik.errors.duration}
+                        </p>
+                      ) : null}
+                    </div>
                   </div>
-                  <div class="form-group spaceBetween">
-                    <label
-                      for="exampleFormControlInput1"
-                      className="bottomSpace"
-                    >
-                      Price
-                    </label>
+                  <div className="Common">
+                    <div class="form-group category  spaceBetween">
+                      <label
+                        for="exampleFormControlInput1"
+                        className="bottomSpace"
+                      >
+                        Category
+                      </label>
+                      <input
+                        type="text"
+                        name="category"
+                        value={formik.values.category}
+                        onBlur={formik.handleBlur}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                        className="form-control "
+                        id="exampleFormControlInput1"
+                        placeholder=""
+                      />
 
-                    <input
-                      type="Number"
-                      name="price"
-                      value={formik.values.price}
-                      onBlur={formik.handleBlur}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                      className="form-control "
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                    />
+                      {formik.touched.category && formik.errors.category ? (
+                        <p className="text-danger small">
+                          {formik.errors.category}
+                        </p>
+                      ) : null}
+                    </div>
+                    <div class="form-group   category">
+                      <label
+                        for="exampleFormControlInput1"
+                        className="bottomSpace"
+                      >
+                        Languages
+                      </label>
+                      <input
+                        type="text"
+                        name="language"
+                        value={formik.values.language}
+                        onBlur={formik.handleBlur}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                        className="form-control "
+                        id="exampleFormControlInput1"
+                        placeholder=""
+                      />
 
-                    {formik.touched.price && formik.errors.price ? (
-                      <p className="text-danger small">{formik.errors.price}</p>
-                    ) : null}
+                      {formik.touched.language && formik.errors.language ? (
+                        <p className="text-danger small">
+                          {formik.errors.language}
+                        </p>
+                      ) : null}
+                    </div>
                   </div>
-                  <div class="form-group ">
-                    <label
-                      for="exampleFormControlInput1"
-                      className="bottomSpace"
-                    >
-                      Duration
-                    </label>
-                    <input
-                      type="Number"
-                      name="duration"
-                      value={formik.values.duration}
-                      onBlur={formik.handleBlur}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                      className="form-control "
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                    />
+                  <div className="">
+                    <div class="form-group top-space ">
+                      <label
+                        for="exampleFormControlInput1"
+                        className="bottomSpace"
+                      >
+                        Course Name
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        onBlur={formik.handleBlur}
+                        placeholder=""
+                        name="name"
+                        value={formik.values.name}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                      />
 
-                    {formik.touched.duration && formik.errors.duration ? (
-                      <p className="text-danger small">
-                        {formik.errors.duration}
-                      </p>
-                    ) : null}
-                  </div>
-                </div>
-                <div className="Common">
-                  <div class="form-group category  spaceBetween">
-                    <label
-                      for="exampleFormControlInput1"
-                      className="bottomSpace"
-                    >
-                      Category
-                    </label>
-                    <input
-                      type="text"
-                      name="category"
-                      value={formik.values.category}
-                      onBlur={formik.handleBlur}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                      className="form-control "
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                    />
+                      {formik.touched.name && formik.errors.name ? (
+                        <p className="text-danger small">
+                          {formik.errors.name}
+                        </p>
+                      ) : null}
+                    </div>
 
-                    {formik.touched.category && formik.errors.category ? (
-                      <p className="text-danger small">
-                        {formik.errors.category}
-                      </p>
-                    ) : null}
-                  </div>
-                  <div class="form-group   category">
-                    <label
-                      for="exampleFormControlInput1"
-                      className="bottomSpace"
-                    >
-                      Languages
-                    </label>
-                    <input
-                      type="text"
-                      name="language"
-                      value={formik.values.language}
-                      onBlur={formik.handleBlur}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                      className="form-control "
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                    />
+                    <div class="form-group top-space">
+                      <label
+                        for="exampleFormControlInput1"
+                        className="bottomSpace"
+                      >
+                        About
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="exampleFormControlInput1"
+                        name="about"
+                        value={formik.values.about}
+                        onBlur={formik.handleBlur}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                        placeholder=""
+                      />
 
-                    {formik.touched.language && formik.errors.language ? (
-                      <p className="text-danger small">
-                        {formik.errors.language}
-                      </p>
-                    ) : null}
-                  </div>
-                </div>
-                <div className="">
-                  <div class="form-group top-space ">
-                    <label
-                      for="exampleFormControlInput1"
-                      className="bottomSpace"
-                    >
-                      Course Name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="name"
-                      onBlur={formik.handleBlur}
-                      placeholder=""
-                      name="name"
-                      value={formik.values.name}
-                      onChange={(e) => {
-                        handleChange(e);
-                      }}
-                    />
-
-                    {formik.touched.name && formik.errors.name ? (
-                      <p className="text-danger small">{formik.errors.name}</p>
-                    ) : null}
+                      {formik.touched.about && formik.errors.about ? (
+                        <p className="text-danger small">
+                          {formik.errors.about}
+                        </p>
+                      ) : null}
+                    </div>
                   </div>
 
                   <div class="form-group top-space">
                     <label
-                      for="exampleFormControlInput1"
+                      for="exampleFormControlTextarea1"
                       className="bottomSpace"
                     >
-                      About
+                      Description
                     </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="exampleFormControlInput1"
-                      name="about"
-                      value={formik.values.about}
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      name="description"
+                      value={formik.values.description}
                       onBlur={formik.handleBlur}
                       onChange={(e) => {
                         handleChange(e);
                       }}
-                      placeholder=""
-                    />
-
-                    {formik.touched.about && formik.errors.about ? (
-                      <p className="text-danger small">{formik.errors.about}</p>
+                    ></textarea>
+                    {formik.touched.description && formik.errors.description ? (
+                      <p className="text-danger small">
+                        {formik.errors.description}
+                      </p>
                     ) : null}
                   </div>
-                </div>
 
-                <div class="form-group top-space">
-                  <label
-                    for="exampleFormControlTextarea1"
-                    className="bottomSpace"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="3"
-                    name="description"
-                    value={formik.values.description}
-                    onBlur={formik.handleBlur}
-                    onChange={(e) => {
-                      handleChange(e);
-                    }}
-                  ></textarea>
-                  {formik.touched.description && formik.errors.description ? (
-                    <p className="text-danger small">
-                      {formik.errors.description}
-                    </p>
-                  ) : null}
-                </div>
-
-                <div className="button">
-                  <div>
-                    {/* <button
+                  <div className="button">
+                    <div>
+                      {/* <button
                       type="button"
                       className="addChapter"
                       data-bs-toggle="modal"
@@ -318,12 +328,19 @@ export default function CourseEdit() {
                     >
                       Edit Chapter
                     </button> */}
+                    </div>
+                    <button type="submit" className="submitbtn">
+                      Submit
+                    </button>
                   </div>
-                  <button type="submit" className="submitbtn">
-                    Submit
-                  </button>
+                </form>
+              ) : (
+                <div class="d-flex justify-content-center align-items-center vh-100">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
                 </div>
-              </form>
+              )}
             </div>
           </div>
         </div>

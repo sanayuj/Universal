@@ -137,7 +137,7 @@ export default function CourseAdd() {
     setCourse([...course, { chapter, lessons: lesson }]);
     setChapter("");
     console.log(course,"$$$$")
-    setchapterName(course)
+    setchapterName(chapter)
     lessonFormik.setFieldValue("lessonName", "");
     lessonFormik.setFieldValue("videoUrl", "");
     setLesson("");
