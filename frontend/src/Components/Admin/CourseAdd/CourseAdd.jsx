@@ -11,7 +11,6 @@ export default function CourseAdd() {
   const lessonNameRef = useRef(null);
   const lessonLinkRef = useRef(null);
   const [categories, setCategories] = useState([]);
-  const [chapterName, setchapterName] = useState([]);
 
   const [image, setImage] = useState("");
   const [lesson, setLesson] = useState([]);
@@ -134,13 +133,16 @@ export default function CourseAdd() {
   };
 
   const courseSubmit = () => {
+  if(chapter.length && lesson.length){
     setCourse([...course, { chapter, lessons: lesson }]);
-    setChapter("");
-    console.log(course, "$$$$");
-    setchapterName(course);
-    lessonFormik.setFieldValue("lessonName", "");
-    lessonFormik.setFieldValue("videoUrl", "");
-    setLesson("");
+  }
+    console.log(lesson, "$$$$");
+    lessonFormik.setFieldValue("chapterName","")
+     lessonFormik.setFieldValue("lessonName", "");
+     lessonFormik.setFieldValue("videoUrl", "");
+     setChapter([])
+     setLesson([])
+   
     // Submit Button
   };
 
@@ -335,9 +337,10 @@ export default function CourseAdd() {
               <div>
                 <hr></hr>
                 <p>Added Chapter</p>
-                {Array.isArray(chapterName) && chapterName.length > 0 ? (
+                
                   <div>
-                    {chapterName.map((value, index) => {
+                    {course.length  && course.map((value, index) => {
+                      console.log(value,"!!")
                       return (
                         <div className="showChapter" key={index}>
                           <p>{`${index + 1} : ${value.chapter}`}</p>
@@ -345,9 +348,7 @@ export default function CourseAdd() {
                       );
                     })}
                   </div>
-                ) : (
-                  <div className=""></div>
-                )}
+                
               </div>
 
               <div className="button">
@@ -465,9 +466,9 @@ export default function CourseAdd() {
                   ) : null}
                 </div>
               </form>
-              {lesson[0] ? (
+              
                 <div>
-                  {lesson.map((value, index) => {
+                  {lesson.length && lesson.map((value, index) => {
                     return (
                       <div className="showLesson">
                         <p> {value.lessonName}</p>
@@ -475,9 +476,7 @@ export default function CourseAdd() {
                     );
                   })}
                 </div>
-              ) : (
-                <div className=""></div>
-              )}
+
 
               <div class="modal-footer">
                 <button
