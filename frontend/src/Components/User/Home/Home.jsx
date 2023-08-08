@@ -33,7 +33,7 @@ export default function Home() {
       <Header />{" "}
       <FilterCategory/>
       <Carousel/>
-      {courseDetails.length >0?
+      {courseDetails.length > 0?
 <div className="container ">
       <div className="row mainContainer">
       <h3 className="allCourseDisplayHeading">Let's start learning, {user?.username ? user.username : ""}</h3>
