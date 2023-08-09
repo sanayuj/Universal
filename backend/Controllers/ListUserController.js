@@ -1,5 +1,7 @@
 const userModel = require("../Model/userModel");
 
+//Show all Users in admin side
+
 module.exports.getAllUser = async (req, res, next) => {
   try {
     let User = await userModel.find({});

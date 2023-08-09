@@ -12,19 +12,21 @@ const userRoutes = require("./Routes/userRoutes");
 const AdminRoutes = require("./Routes/AdminRoutes");
 const maxAge = 3 * 24 * 60 * 60;
 
-//database
+//database config
 dbConnection.dbConnect();
 
+//CORS config
 app.use(cors({
   origin:process.env.ORIGIN,
   methods: ["GET", "POST"],
   credentials: true
 }));
 
+//logger
 app.use(logger("dev"))
 
 
-//session
+//session config
 app.use(
   session({
     secret: "add-secret-key",
@@ -44,7 +46,7 @@ app.use("/", userRoutes);
 app.use("/admin", AdminRoutes);
 
 
-
+//port config
 app.listen(process.env.PORT, () => {
   console.log(`Sever started at port ${process.env.PORT}`);
 });

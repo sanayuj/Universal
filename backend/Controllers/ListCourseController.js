@@ -1,4 +1,7 @@
 const courseModel= require("../Model/CourseModel")
+
+//List all course
+
 module.exports.getAllCourse=async(req,res,next)=>{
     try{
         let courses=await courseModel.find({})

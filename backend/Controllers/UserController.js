@@ -11,11 +11,16 @@ const session = require("express-session");
 const { json, response } = require("express");
 const userModel = require("../Model/userModel");
 
+//Jwt creation
+
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRETE_KEY, {
     expiresIn: maxAge,
   });
 };
+
+//Login error handling function
+
 const handleErrors = (err) => {
   let errors = { name: "", email: "", password: "" };
 
@@ -38,6 +43,8 @@ const handleErrors = (err) => {
   }
   return errors;
 };
+
+//User signup function
 
 module.exports.signup = async (req, res, next) => {
   const { username, email, password, phonenumber, confirmPassword } = req.body;
@@ -62,6 +69,8 @@ module.exports.signup = async (req, res, next) => {
     console.log(err);
   }
 };
+
+//user Otp verify function
 
 module.exports.otp = async (req, res, next) => {
   try {
@@ -102,6 +111,8 @@ module.exports.otp = async (req, res, next) => {
   }
 };
 
+//User login function
+
 module.exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -123,11 +134,12 @@ module.exports.login = async (req, res, next) => {
   }
 };
 
+//forgot password function
+
 module.exports.forgotPassword = async (req, res, next) => {
   try {
     const { phonenumber } = req.body;
     req.session.phonenumber = phonenumber;
-    console.log(req.session.phonenumber, "SESSION GOT in first function!!");
     const customer = await user.findOne({ phonenumber });
     if (customer) {
       client.verify.v2
@@ -141,6 +153,9 @@ module.exports.forgotPassword = async (req, res, next) => {
     res.json({ message: error.message });
   }
 };
+
+//Phone number verification using OTP
+
 module.exports.forgotOtp = async (req, res, next) => {
   try {
     const phonenumber = req.session.phonenumber;
@@ -162,6 +177,8 @@ module.exports.forgotOtp = async (req, res, next) => {
     res.json({ message: error.message });
   }
 };
+
+//Change password if forgot
 
 module.exports.editPassword = async (req, res, next) => {
   try {
@@ -187,6 +204,8 @@ module.exports.editPassword = async (req, res, next) => {
   }
 };
 
+//Resend Otp function
+
 module.exports.resendOtp = async (req, res, next) => {
   try {
     const phonenumber = req.session.phonenumber;
@@ -205,12 +224,7 @@ module.exports.resendOtp = async (req, res, next) => {
   }
 };
 
-module.exports.getUserProfile = async (req, res, next) => {
-  try {
-  } catch (error) {
-    res.json({ message: error.message });
-  }
-};
+//Show user details in header
 
 module.exports.userHeader = async (req, res, next) => {
   try {
@@ -220,6 +234,8 @@ module.exports.userHeader = async (req, res, next) => {
     res.json({ status: false });
   }
 };
+
+//Update password using current password
 
 module.exports.profileChangePassword = async (req, res, next) => {
   try {
@@ -253,6 +269,8 @@ module.exports.profileChangePassword = async (req, res, next) => {
   }
 };
 
+//user profile picture update function
+
 module.exports.userProfileSubmit = async (req, res, next) => {
   try {
 
@@ -269,6 +287,8 @@ module.exports.userProfileSubmit = async (req, res, next) => {
     res.json({ message: "Internal server error", status: false });
   }
 };
+
+//User feedback after brought course
 
 module.exports.sendFeedback = async (req, res, next) => {
   try {

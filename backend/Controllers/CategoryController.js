@@ -2,6 +2,8 @@ const categoryModel = require("../Model/CategoryModel");
 const { uploadImage } = require("../Middlewares/multer");
 const CourseModel = require("../Model/CourseModel");
 
+//Add Category Function
+
 module.exports.addCategory = async (req, res, next) => {
   try {
     let categoryImage = req.files.image[0].path.replace("public/", "");
@@ -24,6 +26,8 @@ module.exports.addCategory = async (req, res, next) => {
   }
 };
 
+//show Category Function
+
 module.exports.getCategory = async (req, res, next) => {
   try {
     const categories = await categoryModel.find({});
@@ -40,6 +44,8 @@ module.exports.getCategory = async (req, res, next) => {
   }
 };
 
+// show course filter accourding category
+
 module.exports.getCourseByCategory = async (req, res, next) => {
   try {
     const skip = (req.query.currectPage - 1) * req.query.limit;
@@ -47,7 +53,7 @@ module.exports.getCourseByCategory = async (req, res, next) => {
     const totalCount = await CourseModel.find({
       category: req.params.categoryName,
     }).countDocuments({});
-    
+
     const totalPages = Math.ceil(totalCount / limit);
     const categoryCourse = await CourseModel.find({
       category: req.params.categoryName,
@@ -55,17 +61,17 @@ module.exports.getCourseByCategory = async (req, res, next) => {
       .skip(skip)
       .limit(limit);
 
-      if(!categoryCourse || categoryCourse.length===0){
-        res.json({ status: false, message: 'No Course found' });
-      }else{
-    res.json({
-      message: "fetch course by category",
-      status: true,
-      categoryCourse,
-      totalCount,
-      totalPages
-    });
-  }
+    if (!categoryCourse || categoryCourse.length === 0) {
+      res.json({ status: false, message: "No Course found" });
+    } else {
+      res.json({
+        message: "fetch course by category",
+        status: true,
+        categoryCourse,
+        totalCount,
+        totalPages,
+      });
+    }
   } catch (error) {
     res.json({ message: "Internal server error", staus: false });
   }

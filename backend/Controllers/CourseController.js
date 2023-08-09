@@ -6,11 +6,12 @@ const Razorpay = require("razorpay");
 const { error } = require("console");
 const crypto = require("crypto");
 
+
+//Add course in Admin page
+
 module.exports.addCourse = async (req, res, next) => {
   try {
     let courseImage = req.files.image[0].path.replace("public/", "");
-
-    console.log(req.body);
 
     const newCourse = new courseModel({
       name: req.body.name,
@@ -37,6 +38,8 @@ module.exports.addCourse = async (req, res, next) => {
   }
 };
 
+//Show All course 
+
 module.exports.getAllCourse = async (req, res, next) => {
   try {
     let course = await courseModel.find({});
@@ -49,6 +52,8 @@ module.exports.getAllCourse = async (req, res, next) => {
     res.json({ message: "Internal server Error", error });
   }
 };
+
+//Delete course function
 
 module.exports.deleteCourse = async (req, res, next) => {
   try {
@@ -73,6 +78,8 @@ module.exports.deleteCourse = async (req, res, next) => {
   }
 };
 
+// Show selected Course
+
 module.exports.getCourseById = async (req, res, next) => {
   try {
     const course = await courseModel.findById({ _id: req.params.courseId });
@@ -89,6 +96,8 @@ module.exports.getCourseById = async (req, res, next) => {
     res.json({ message: "Internal server error", status: false });
   }
 };
+
+// Course edit function 
 
 module.exports.editCourse = async (req, res, next) => {
   try {
@@ -122,6 +131,8 @@ module.exports.editCourse = async (req, res, next) => {
   }
 };
 
+// Buy course function 
+
 module.exports.buyCourse = async (req, res, next) => {
   try {
     const CourseId = req.params.courseId;
@@ -152,6 +163,8 @@ module.exports.buyCourse = async (req, res, next) => {
   }
 };
 
+// Payment gateway function 
+
 module.exports.razorpayCall = async (req, res, next) => {
   try {
     const CourseId = req.params.courseId;
@@ -179,6 +192,8 @@ module.exports.razorpayCall = async (req, res, next) => {
     res.json({ message: "Internal server error", status: false });
   }
 };
+
+//Payment Verify Function
 
 module.exports.verify = async (req, res, next) => {
   const courseId = req.body.courseId;
@@ -231,6 +246,8 @@ module.exports.verify = async (req, res, next) => {
     res.json({ message: "Internal server error!", status: false });
   }
 };
+
+// Search operation function
 
 module.exports.search = async (req, res, next) => {
   try {

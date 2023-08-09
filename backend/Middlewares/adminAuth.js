@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken')
 const AdminDB=require("../Model/adminModel")
 
+
+//Admin Authenticatio function using JWT
+
 module.exports = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization

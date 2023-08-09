@@ -1,5 +1,8 @@
 const multer = require('multer');
 
+
+//Image upload and filter function
+
 //image filter 
 const fileFilter = (req, file, cb) => {
     if (

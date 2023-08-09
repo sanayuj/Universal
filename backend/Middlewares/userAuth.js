@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 
 const userModel = require("../Model/userModel");
 
+//User Authenticatio function using JWT
+
 module.exports = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;

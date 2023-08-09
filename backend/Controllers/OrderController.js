@@ -1,6 +1,8 @@
 const OrderModel = require("../Model/BookingModal");
 const CourseModel = require("../Model/CourseModel");
 
+//Show Order Details in admin Side
+
 module.exports.getOrderDetails = async (req, res, next) => {
   try {
     const courseId = req.params.courseId;
@@ -17,6 +19,8 @@ module.exports.getOrderDetails = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error", status: false });
   }
 };
+
+
 module.exports.getUserCourse = async (req, res, next) => {
   try {
     const userId = req.user._id;
@@ -36,6 +40,8 @@ module.exports.getUserCourse = async (req, res, next) => {
   }
 };
 
+//Show all user Order Details
+
 module.exports.getBookingHistroy = async (req, res, next) => {
   try {
     const BookingDetails = await OrderModel.find()
@@ -51,6 +57,8 @@ module.exports.getBookingHistroy = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error", status: false });
   }
 };
+
+//Show specific user Order Details
 
 module.exports.getSingleBookingDetails = async (req, res, next) => {
   try {

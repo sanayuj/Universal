@@ -12,8 +12,10 @@ export default function OrderPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+console.log("###");
     userCourse()
       .then((response) => {
+        console.log(response.data,"adasda")
         setLoading(false);
         const course = response.data.courseDetails;
         setCourseDetails(course);
@@ -34,11 +36,14 @@ export default function OrderPage() {
         <div className="MainContent">
           {courseDetails ? (
             courseDetails?.map((course) => (
+            
               <div
+
                 className="CourseDetails"
                 onClick={() => handleCourseClick(course.course_id._id)}
                 key={course._id}
               >
+                {console.log(course,"CCCourse")}
                 <div className="subContent">
                   <div>
                     <img

@@ -13,6 +13,9 @@ const createToken = (id) => {
   });
 };
 
+
+//Admin Login function
+
 module.exports.Adminlogin = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -39,6 +42,8 @@ module.exports.Adminlogin = async (req, res, next) => {
     res.json({ status: false, message: "error.message" });
   }
 };
+
+// Admin Dashboard Details
 
 module.exports.adminDashboard=async(req,res,next)=>{
   try{
